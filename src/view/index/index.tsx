@@ -9,6 +9,9 @@ function App() {
   return (
     <>
       <div>
+        <Button color="default" variant="solid">
+          Solid
+        </Button>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

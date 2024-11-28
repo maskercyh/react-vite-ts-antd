@@ -23,7 +23,7 @@ export function createVitePlugins(env: Record<string, string>) {
       dirs: ['src/stores', 'src/composables'],
     }),
     Components({
-      resolvers: [AntdResolver()],
+      // resolvers: [AntdResolver()],
       dts: true,
     }),
     // https://github.com/kirklin/unplugin-config

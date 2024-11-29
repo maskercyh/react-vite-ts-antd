@@ -29,7 +29,7 @@ export function createVitePlugins(env: Record<string, string>) {
       ],
       resolvers: [AntdResolver()],
       dts: 'types/auto-imports.d.ts',
-      dirs: ['src/stores', 'src/composables'],
+      dirs: ['src/stores', 'src/composables', 'src/components'],
     }),
     Components({
       dts: true,

@@ -38,7 +38,8 @@
     "react-i18next": "^15.1.2",
     "react-redux": "^9.1.2",
     "redux": "^5.0.1",
-    "rollup-plugin-copy": "^3.5.0"
+    "rollup-plugin-copy": "^3.5.0",
+    "uuidjs": "^5.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "2.9.0",

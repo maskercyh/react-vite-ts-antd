@@ -3,6 +3,7 @@ import {
   MobileOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { login } from '@/api/login';
 import {
   LoginForm,
   ProFormCaptcha,
@@ -95,7 +96,8 @@ const Login: React.FC = () => {
     // }
   };
 
-  const handleSubmit = async (values:any) => {return
+  const handleSubmit = async (values:any) => {
+ 
     try {
       
       // 登录

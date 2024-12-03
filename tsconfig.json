@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "esnext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,15 +23,30 @@
     // paths
     "baseUrl": ".",
     "paths": {
-      "~@/*": ["src/*"],
-      "~/*": ["src/*"],
-      "@/*": ["src/*"],
-      "~#/*": ["src/enums/*"],
+      "~@/*": [
+        "src/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "~#/*": [
+        "src/enums/*"
+      ],
     }
-  },  
-  "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx","types/**/*.d.ts", "server"],
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src",
+    "server"
+  ],
   "references": [
-    { "path": "./tsconfig.node.json" }
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }

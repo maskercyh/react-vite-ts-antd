@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev-api": "concurrently \"vite\" \"npm run mock-api\"",
     "build": "tsc -b && vite build",
-    "mock-api": "nodemon -q server/index.js",
+    "mock-api": "nodemon  -q  server/index.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

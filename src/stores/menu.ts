@@ -1,28 +1,43 @@
-import type { SideMenu } from '#/public';
-import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface MenuState {
   isPhone: boolean;
   isCollapsed: boolean;
-  selectedKeys: string; // 菜单选中值
-  openKeys: string[]; // 菜单展开项
-  menuList: SideMenu[]; // 菜单列表数据
-  toggleCollapsed: (isCollapsed: boolean) => void;
-  togglePhone: (isPhone: boolean) => void;
-  setSelectedKeys: (selectedKeys: string) => void;
-  setOpenKeys: (openKeys: string[]) => void;
-  setMenuList: (menuList: SideMenu[]) => void;
+  selectedKeys: string;
+  openKeys: string[];
+  menuList: any[]; // 假设 `SideMenu` 类型定义
 }
 
-export const useMenuStore = createSlice<MenuState>((set) => ({
+const initialState: MenuState = {
   isPhone: false,
   isCollapsed: false,
-  selectedKeys: 'dashboard', // 菜单选中值
-  openKeys: ['Dashboard'], // 菜单展开项
-  menuList: [], // 菜单列表数据
-  toggleCollapsed: (isCollapsed: boolean) => set({ isCollapsed }),
-  togglePhone: (isPhone: boolean) => set({ isPhone }),
-  setSelectedKeys: (selectedKeys: string) => set({ selectedKeys }),
-  setOpenKeys: (openKeys: string[]) => set({ openKeys }),
-  setMenuList: (menuList: SideMenu[]) => set({ menuList }),
-}));
+  selectedKeys: 'dashboard',
+  openKeys: ['Dashboard'],
+  menuList: [],
+};
+
+const menuSlice = createSlice({
+  name: 'menu',
+  initialState,
+  reducers: {
+    toggleCollapsed: (state, action: PayloadAction<boolean>) => {
+      state.isCollapsed = action.payload;
+    },
+    togglePhone: (state, action: PayloadAction<boolean>) => {
+      state.isPhone = action.payload;
+    },
+    setSelectedKeys: (state, action: PayloadAction<string>) => {
+      state.selectedKeys = action.payload;
+    },
+    setOpenKeys: (state, action: PayloadAction<string[]>) => {
+      state.openKeys = action.payload;
+    },
+    setMenuList: (state, action: PayloadAction<any[]>) => {
+      state.menuList = action.payload;
+    },
+  },
+});
+
+export const { toggleCollapsed, togglePhone, setSelectedKeys, setOpenKeys, setMenuList } = menuSlice.actions;
+
+export default menuSlice.reducer;

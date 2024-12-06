@@ -32,12 +32,10 @@ const menuSlice = createSlice({
     setOpenKeys: (state, action: PayloadAction<string[]>) => {
       state.openKeys = action.payload;
     },
-    setMenuList: (state, action: PayloadAction<any[]>) => {
-      state.menuList = action.payload;
-    },
+
   },
 });
 
-export const { toggleCollapsed, togglePhone, setSelectedKeys, setOpenKeys, setMenuList } = menuSlice.actions;
+export const { toggleCollapsed, togglePhone, setSelectedKeys, setOpenKeys } = menuSlice.actions;
 
 export default menuSlice.reducer;

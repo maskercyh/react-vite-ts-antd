@@ -1,16 +1,28 @@
 import { LockOutlined, MobileOutlined, UserOutlined } from "@ant-design/icons";
 import { login } from "@/api/login";
+import { getUserInfo } from "@/api/user";
 import {
   LoginForm,
   ProFormCaptcha,
   ProFormCheckbox,
   ProFormText,
 } from "@ant-design/pro-components";
+import { STORAGE_AUTHORIZE_KEY } from "@/composables/authorization";
+import { getLocalInfo } from "@/utils/local";
+import type { AppDispatch } from "@/stores";
+import { useDispatch } from "react-redux";
 import Footer from "~@/components/Footer";
 import { Alert, message, Tabs } from "antd";
 import { createStyles } from "antd-style";
-import React, { useState } from "react";
-import { setMenuList } from "@/stores/menu";
+import React, { useEffect, useState } from "react";
+import {
+  setMenuList,
+  setToken,
+  setPermissions,
+  setUserInfo,
+} from "@/stores/user";
+import { useNavigate } from "react-router-dom";
+import { useCommonStore } from "@/stores";
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -48,16 +60,6 @@ const useStyles = createStyles(({ token }) => {
   };
 });
 
-const Lang = () => {
-  const { styles } = useStyles();
-
-  return (
-    <div className={styles.lang} data-lang>
-      {/* {SelectLang && <SelectLang />} */}
-    </div>
-  );
-};
-
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => {
@@ -74,52 +76,49 @@ const LoginMessage: React.FC<{
 };
 
 const Login: React.FC = () => {
-  const [userLoginState, setUserLoginState] = useState({});
+  const navigate = useNavigate();
   const [type, setType] = useState<string>("account");
-  // const { initialState, setInitialState } = useModel('@@initialState');
+  const token = getLocalInfo(STORAGE_AUTHORIZE_KEY);
+  const { permissions, menuList } = useCommonStore();
+  const [isLoading, setLoading] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    // 如果存在token，则直接进入页面
+    if (token) {
+      // 如果不存在缓存则获取权限
+      if (!permissions.length) {
+        fetchUserInfo();
+      } else {
+        // 有权限则直接跳转
+        navigate("/index");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const { styles } = useStyles();
   // const intl = useIntl();
 
   const fetchUserInfo = async () => {
-    // const userInfo = await initialState?.fetchUserInfo?.();
-    // if (userInfo) {
-    //   flushSync(() => {
-    //     setInitialState((s) => ({
-    //       ...s,
-    //       currentUser: userInfo,
-    //     }));
-    //   });
-    // }
+    const { code, data } = await getUserInfo();
+    const { user, permissions, menuList } = data;
+    dispatch(setMenuList(menuList));
+    dispatch(setUserInfo(user));
+    dispatch(setPermissions(permissions));
+    navigate("/index");
   };
 
   const handleSubmit = async (values: any) => {
     try {
-      // 登录
-      const msg = await login({ ...values, type });
-      if (msg.status === "ok") {
-        const defaultLoginSuccessMessage = intl.formatMessage({
-          id: "pages.login.success",
-          defaultMessage: "登录成功！",
-        });
-        message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
-        const urlParams = new URL(window.location.href).searchParams;
-        window.location.href = urlParams.get("redirect") || "/";
-        return;
-      }
-      console.log(msg);
-      // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
-    } catch (error) {
-      const defaultLoginFailureMessage = intl.formatMessage({
-        id: "pages.login.failure",
-        defaultMessage: "登录失败，请重试！",
-      });
-      console.log(error);
-      message.error(defaultLoginFailureMessage);
+      setLoading(true);
+      const { code, data } = await login(values);
+      if (Number(code) !== 200) return;
+      dispatch(setToken(data.token));
+      await fetchUserInfo();
+    } finally {
+      setLoading(false);
     }
   };
-  const { status, type: loginType } = userLoginState;
 
   return (
     <div className={styles.container}>

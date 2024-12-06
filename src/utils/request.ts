@@ -5,7 +5,7 @@ import { STORAGE_AUTHORIZE_KEY } from '@/composables/authorization'
 import { ContentTypeEnum, RequestEnum } from '~#/http-enum'
 // import { useSelector } from 'react-redux';
 // import { RootState } from '@/stores';
-import { logout } from '@/composables/authorization';
+import { logout } from '@/stores/user';
 import { notification as notificationInfo } from 'antd'
 // const token = useSelector((state: RootState) => state.auth.token);
 // import router from '~/router'

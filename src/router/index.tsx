@@ -1,36 +1,31 @@
-import {
-  HashRouter,
-  useRoutes,
-  Routes,
-  BrowserRouter,
-  Route,
-} from "react-router-dom";
-import { useEffect } from "react";
+import { HashRouter, useRoutes, BrowserRouter } from "react-router-dom";
 import { App, ConfigProvider } from "antd";
 import type { RouteObject } from "react-router-dom";
 import Login from "@/view/user/login";
 import NotFound from "@/view/404";
-import Index from "@/view/index/index";
 import LayoutSetting from "@/config/default-setting";
 import Layout from "@/layout";
-// keepalive
-import { AliveScope, KeepAlive } from "react-activation";
-const newRoutes: RouteObject[] = [
+import { lazy, Suspense } from "react";
+import { getLocalInfo } from "@/utils/local";
+import { AliveScope } from "react-activation";
+import { STORAGE_AUTHORIZE_KEY } from "@/composables/authorization";
+import { useCallback, useEffect, useState } from "react";
+import { getUserInfo } from "@/api/user";
+import type { AppDispatch } from "@/stores";
+import { useDispatch } from "react-redux";
+import { setMenuList, setPermissions, setUserInfo } from "@/stores/user";
+// 动态导入页面
+const pages = import.meta.glob("../view/**/*.tsx");
+let baseRoutes: RouteObject[] = [
+  {
+    path: "",
+    element: <Layout />,
+    children: [],
+  },
   {
     path: "login",
     element: <Login />,
   },
-  {
-    path: "",
-    element: <Layout />,
-    children: [
-      {
-        path: "index",
-        element: <Index />,
-      },
-    ],
-  },
-
   {
     path: "*",
     element: <NotFound />,
@@ -38,7 +33,48 @@ const newRoutes: RouteObject[] = [
 ];
 
 function Page() {
-  return useRoutes(newRoutes);
+  const token = getLocalInfo(STORAGE_AUTHORIZE_KEY);
+  const [routes, setRoutes] = useState<any>([]);
+  const [dynamicRoutes, setDynamicRoutes] = useState<RouteObject[]>([]);
+  const dispatch: AppDispatch = useDispatch();
+
+  // 获取用户信息和权限
+  const fetchUserInfo = useCallback(async () => {
+    try {
+      const { code, data } = await getUserInfo();
+      if (Number(code) !== 200) return;
+      const { user, permissions, menuList } = data;
+      setRoutes(menuList); // 更新路由数据
+      dispatch(setUserInfo(user));
+      dispatch(setMenuList(menuList || []));
+      dispatch(setPermissions(permissions));
+    } catch (err) {
+      console.error("获取用户数据失败:", err);
+      dispatch(setPermissions([]));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (token && routes.length === 0) {
+      fetchUserInfo();
+    }
+  }, [fetchUserInfo, token, routes.length]);
+
+  useEffect(() => {
+    // 动态生成路由
+    if (routes.length > 0) {
+      const generatedRoutes = routes.map((item: any) => {
+        const Component = lazy(() => pages[`../view/${item.element}.tsx`]());
+        return {
+          path: item.path,
+          element: <Component />,
+        };
+      });
+      setDynamicRoutes(generatedRoutes);
+    }
+  }, [routes]); // 依赖于 routes，确保路由数据更新时重新生成路由
+
+  return useRoutes([...baseRoutes, ...dynamicRoutes]); // 渲染路由
 }
 
 function GenPage() {
@@ -46,12 +82,15 @@ function GenPage() {
     <ConfigProvider>
       <App>
         <AliveScope>
-          <Page />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Page />
+          </Suspense>
         </AliveScope>
       </App>
     </ConfigProvider>
   );
 }
+
 function GenHashRouter() {
   return (
     <HashRouter>
@@ -59,6 +98,7 @@ function GenHashRouter() {
     </HashRouter>
   );
 }
+
 function GenBrowserRouter() {
   return (
     <BrowserRouter>
@@ -68,13 +108,6 @@ function GenBrowserRouter() {
 }
 
 export default () => {
-  // 顶部进度条
-  useEffect(() => {}, []);
-
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   return LayoutSetting.route === "hash" ? (
     <GenHashRouter />
   ) : (

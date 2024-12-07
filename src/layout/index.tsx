@@ -14,8 +14,15 @@ import { debounce } from "lodash";
 import { getUserInfo } from "@/api/user";
 import KeepAlive from "react-activation";
 function Layout() {
-  const { permissions, userId, isMaximize, isCollapsed, isPhone, isRefresh } =
-    useCommonStore();
+  const {
+    permissions,
+    menuList,
+    userId,
+    isMaximize,
+    isCollapsed,
+    isPhone,
+    isRefresh,
+  } = useCommonStore();
   const navigate = useNavigate();
   const outlet = useOutlet();
   const dispatch: AppDispatch = useDispatch();
@@ -24,7 +31,6 @@ function Layout() {
   const uri = pathname + search;
   const [isLoading, setLoading] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
-
   /** 获取用户信息和权限 */
   const fetchUserInfo = useCallback(async () => {
     try {
@@ -35,6 +41,7 @@ function Layout() {
       dispatch(setUserInfo(user));
       dispatch(setMenuList(menuList || []));
       dispatch(setPermissions(permissions));
+      navigate("/index");
     } catch (err) {
       console.error("获取用户数据失败:", err);
       setPermissions([]);
@@ -48,13 +55,10 @@ function Layout() {
     // 如果没有token，则返回登录页
     if (!token) {
       navigate("/login");
+    } else {
+      navigate("/index");
     }
-
-    // 当用户信息缓存不存在时则重新获取
-    if (token && !userId) {
-      fetchUserInfo();
-    }
-  }, [fetchUserInfo, navigate, token, userId]);
+  }, [navigate, token, userId]);
 
   // 监测是否需要刷新
   useEffect(() => {

@@ -19,14 +19,14 @@ import "dayjs/locale/zh-cn";
 dayjs.locale("zh-cn");
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <StyleProvider
-      hashPriority="high"
-      transformers={[legacyLogicalPropertiesTransformer]}
-    >
-      <Provider store={store}>
-        <Router />
-      </Provider>
-    </StyleProvider>
-  </StrictMode>
+  // <StrictMode>
+  <StyleProvider
+    hashPriority="high"
+    transformers={[legacyLogicalPropertiesTransformer]}
+  >
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  </StyleProvider>
+  // </StrictMode>
 );

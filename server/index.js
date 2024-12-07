@@ -28,10 +28,17 @@ app.post('/api/user/info', (req, res) => {
             menuList: [
                 {
                     "label": "首页",
-                    "labelEn": "Dashboard",
+                    "labelEn": "Index",
                     "icon": "la:tachometer-alt",
-                    "key": "/index",
-                    "rule": "/index"
+                    "path": "/index",
+                    "element": "index/index"
+                },
+                {
+                    "label": "dashboard",
+                    "labelEn": "dashboard",
+                    "icon": "la:tachometer-alt",
+                    "path": "/dashboard",
+                    "element": "dashboard/index"
                 },
             ],
             user: {

@@ -2,9 +2,21 @@ import { useState } from "react";
 import reactLogo from "@/assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./index.css";
-
+import { logout } from "@/stores/user";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useAliveController } from "react-activation";
+import type { AppDispatch } from "~@/stores";
 function App() {
+  const { clear } = useAliveController();
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
   const [count, setCount] = useState(0);
+  const handleLogout = async () => {
+    await dispatch(logout());
+    clear();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -18,6 +30,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
+        <button onClick={handleLogout}>logout</button>
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>

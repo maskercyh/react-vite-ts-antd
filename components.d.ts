@@ -3,4 +3,8 @@ export {}
 declare global{
 	const Layout: typeof import('./src/layout/index')['default']
 	const NotFound: typeof import('./src/view/404')['default']
+	const Dashboard: typeof import('./src/view/dashboard/index')['default']
+	const Bar: typeof import('./src/view/dashboard/components/Bar')['default']
+	const Block: typeof import('./src/view/dashboard/components/Block')['default']
+	const Line: typeof import('./src/view/dashboard/components/Line')['default']
 }

@@ -12,7 +12,7 @@ const initSearch = {
 };
 
 function Dashboard() {
-  return <div>13123</div>;
+  return <div>dashboard</div>;
 }
 
 export default Dashboard;

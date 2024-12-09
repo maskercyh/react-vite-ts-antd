@@ -101,11 +101,13 @@ const Login: React.FC = () => {
 
   const fetchUserInfo = async () => {
     const { code, data } = await getUserInfo();
-    const { user, permissions, menuList } = data;
-    dispatch(setMenuList(menuList));
-    dispatch(setUserInfo(user));
-    dispatch(setPermissions(permissions));
-    navigate("/index");
+    if (code == 200) {
+      const { user, permissions, menuList } = data;
+      dispatch(setMenuList(menuList));
+      dispatch(setUserInfo(user));
+      dispatch(setPermissions(permissions));
+      navigate("/index");
+    }
   };
 
   const handleSubmit = async (values: any) => {

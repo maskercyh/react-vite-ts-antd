@@ -10,6 +10,7 @@ import type { AppDispatch } from "@/stores";
 import { STORAGE_AUTHORIZE_KEY } from "@/composables/authorization";
 import { getLocalInfo } from "@/utils/local";
 import { debounce } from "lodash";
+import Menu from "./components/Menu";
 import { AliveScope, KeepAlive } from "react-activation";
 function Layout() {
   const {
@@ -53,9 +54,9 @@ function Layout() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
-    <div id="layout">
+    <div id="layout" className={`flex`}>
+      <Menu />
       {/* <KeepAlive id={uri} name={uri} enabled={false}> */}
       <Outlet />
       {/* </KeepAlive> */}

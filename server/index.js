@@ -31,33 +31,34 @@ app.post('/api/user/info', (req, res) => {
     res.status(200);
     res.json({
         data: {
-            menuList: {
-                layoutRoute: [
-                    {
-                        "label": "首页",
-                        "labelEn": "Index",
-                        "icon": "la:tachometer-alt",
-                        "path": "/index",
-                        "element": "index/index"
-                    },
-                    {
-                        "label": "dashboard",
-                        "labelEn": "dashboard",
-                        "icon": "la:tachometer-alt",
-                        "path": "/dashboard",
-                        "element": "dashboard/index"
-                    }
-                ],
-                route: [
-                    {
-                        "label": "404",
-                        "labelEn": "404",
-                        "icon": "la:tachometer-alt",
-                        "path": "*",
-                        "element": "404"
-                    }
-                ]
-            },
+            menuList: [
+                // {layoutRoute: [
+                {
+                    "label": "首页",
+                    "labelEn": "Index",
+                    "icon": "la:tachometer-alt",
+                    "path": "/index",
+                    "element": "index/index"
+                },
+                {
+                    "label": "dashboard",
+                    "labelEn": "dashboard",
+                    "icon": "la:tachometer-alt",
+                    "path": "/dashboard",
+                    "element": "dashboard/index"
+                },
+                // ],
+                // route: [
+                // {
+                //     "label": "404",
+                //     "labelEn": "404",
+                //     "icon": "la:tachometer-alt",
+                //     "path": "*",
+                //     "element": "404"
+                // }
+                // ]
+                // },
+            ],
             user: {
                 userName: '123'
             },

@@ -14,7 +14,9 @@ function App() {
     await dispatch(logout());
     navigate("login");
   }
-
+  function toDdashboard() {
+    navigate("/dashboard");
+  }
   return (
     <>
       <div>
@@ -29,6 +31,9 @@ function App() {
       <div className="card">
         <button className="mt-25px margin-auto" onClick={handelLogout}>
           退出登录
+        </button>
+        <button className="mt-25px margin-auto" onClick={toDdashboard}>
+          toDdashboard
         </button>
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}

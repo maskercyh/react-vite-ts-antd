@@ -14,10 +14,7 @@ const initialState = {
     email: '',
     phone: ''
   },
-  menuList: {
-    layoutRoute: [],
-    route: []
-  },
+  menuList: [],
 };
 
 // 创建切片
@@ -39,16 +36,13 @@ export const userSlice = createSlice({
       state.permissions = action.payload;
     },
     clearInfo: (state) => {
-      state.menuList = {
-        layoutRoute: [],
-        route: []
-      };
-      state.userInfo = {
-        id: 0,
-        username: '',
-        email: '',
-        phone: ''
-      };
+      state.menuList = [],
+        state.userInfo = {
+          id: 0,
+          username: '',
+          email: '',
+          phone: ''
+        };
     },
   },
 });

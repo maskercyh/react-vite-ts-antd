@@ -10,7 +10,11 @@ import type { AppDispatch } from "@/stores";
 import { STORAGE_AUTHORIZE_KEY } from "@/composables/authorization";
 import { getLocalInfo } from "@/utils/local";
 import { debounce } from "lodash";
+<<<<<<< HEAD
 import KeepAlive from "react-activation";
+=======
+import { AliveScope, KeepAlive } from "react-activation";
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
 function Layout() {
   const {
     permissions,
@@ -29,9 +33,12 @@ function Layout() {
   const uri = pathname + search;
   const [isLoading, setLoading] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
+<<<<<<< HEAD
   /** 获取用户信息和权限 */
 
   console.log(1313123);
+=======
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
 
   // 监测是否需要刷新
   useEffect(() => {
@@ -59,10 +66,16 @@ function Layout() {
 
   return (
     <div id="layout">
+<<<<<<< HEAD
       {uri}
       <KeepAlive id={uri} name={uri}>
         <Outlet />
       </KeepAlive>
+=======
+      {/* <KeepAlive id={uri} name={uri} enabled={false}> */}
+      <Outlet />
+      {/* </KeepAlive> */}
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
     </div>
   );
 }

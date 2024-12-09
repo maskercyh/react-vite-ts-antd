@@ -1,4 +1,9 @@
-import { HashRouter, useRoutes, BrowserRouter } from "react-router-dom";
+import {
+  HashRouter,
+  useRoutes,
+  BrowserRouter,
+  useNavigate,
+} from "react-router-dom";
 import { App, ConfigProvider } from "antd";
 import type { RouteObject } from "react-router-dom";
 import Login from "@/view/user/login";
@@ -7,10 +12,11 @@ import LayoutSetting from "@/config/default-setting";
 import Layout from "@/layout";
 import { lazy, Suspense, useState, useEffect, useCallback } from "react";
 import { getLocalInfo } from "@/utils/local";
-import { AliveScope } from "react-activation";
+import KeepAlive from "react-activation";
 import { STORAGE_AUTHORIZE_KEY } from "@/composables/authorization";
 import { getUserInfo } from "@/api/user";
 import type { AppDispatch } from "@/stores";
+<<<<<<< HEAD
 import Dashboard from "~@/view/dashboard";
 import Loading from "~@/components/loading";
 import { setMenuList, setPermissions, setUserInfo } from "@/stores/user";
@@ -82,6 +88,15 @@ function Page() {
 }
 // Page 组件外部包装
 function GenPage() {
+=======
+import Loading from "~@/components/Loading";
+import { setMenuList, setPermissions, setUserInfo } from "@/stores/user";
+import { useSelector, useDispatch } from "react-redux";
+import AppPage from "./App";
+// Page 组件外部包装
+function GenPage() {
+  const navigator = useNavigate();
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
   const token = getLocalInfo(STORAGE_AUTHORIZE_KEY);
   const dispatch: AppDispatch = useDispatch();
   // 获取用户信息和权限
@@ -103,17 +118,23 @@ function GenPage() {
   useEffect(() => {
     if (token) {
       fetchUserInfo();
+    } else {
+      navigator("login");
     }
   }, [token]);
 
   return (
     <ConfigProvider>
       <App>
+<<<<<<< HEAD
         <AliveScope>
           <Suspense fallback={<Loading />}>
             <Page />
           </Suspense>
         </AliveScope>
+=======
+        <AppPage />
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
       </App>
     </ConfigProvider>
   );

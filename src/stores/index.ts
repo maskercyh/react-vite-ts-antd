@@ -21,9 +21,7 @@ export const store = configureStore({
  */
 export const useCommonStore = () => {
     //token
-    const token = useSelector((state: RootState) => {
-        return state.user.token
-    });
+    const token = useSelector((state: RootState) => state.user.token);
     // 权限
     const permissions = useSelector((state: RootState) => state.user.permissions);
     // 用户ID

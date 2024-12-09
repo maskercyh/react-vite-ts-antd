@@ -21,37 +21,56 @@ app.post('/api/login/account', (req, res) => {
         }, msg: '', code: 200
     },);
 });
+<<<<<<< HEAD
 
 app.post('/api/user/logout', (req, res) => {
     res.status(200);
     token = ''
+=======
+app.post('/api/user/logout', (req, res) => {
+    res.status(200);
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
     res.json({
         data: {
         }, msg: '', code: 200
     },);
 });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
 app.post('/api/user/info', (req, res) => {
     res.status(200);
     res.json({
         data: {
-            menuList: [
-                {
-                    "label": "首页",
-                    "labelEn": "Index",
-                    "icon": "la:tachometer-alt",
-                    "path": "/index",
-                    "element": "index/index"
-                },
-                {
-                    "label": "dashboard",
-                    "labelEn": "dashboard",
-                    "icon": "la:tachometer-alt",
-                    "path": "/dashboard",
-                    "element": "dashboard/index"
-                },
-            ],
+            menuList: {
+                layoutRoute: [
+                    {
+                        "label": "首页",
+                        "labelEn": "Index",
+                        "icon": "la:tachometer-alt",
+                        "path": "/index",
+                        "element": "index/index"
+                    },
+                    {
+                        "label": "dashboard",
+                        "labelEn": "dashboard",
+                        "icon": "la:tachometer-alt",
+                        "path": "/dashboard",
+                        "element": "dashboard/index"
+                    }
+                ],
+                route: [
+                    {
+                        "label": "404",
+                        "labelEn": "404",
+                        "icon": "la:tachometer-alt",
+                        "path": "*",
+                        "element": "404"
+                    }
+                ]
+            },
             user: {
                 userName: '123'
             },

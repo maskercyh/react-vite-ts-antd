@@ -14,7 +14,14 @@ const initialState = {
     email: '',
     phone: ''
   },
+<<<<<<< HEAD
   menuList: [],
+=======
+  menuList: {
+    layoutRoute: [],
+    route: []
+  },
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
 };
 
 // 创建切片
@@ -36,8 +43,15 @@ export const userSlice = createSlice({
       state.permissions = action.payload;
     },
     clearInfo: (state) => {
+<<<<<<< HEAD
       removeLocalInfo(STORAGE_AUTHORIZE_KEY);
       state.menuList = [];
+=======
+      state.menuList = {
+        layoutRoute: [],
+        route: []
+      };
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
       state.userInfo = {
         id: 0,
         username: '',
@@ -53,10 +67,19 @@ export const logout = createAsyncThunk(
   'user/logout',
   async (_, { dispatch }) => {
     try {
+<<<<<<< HEAD
       await userLogout();
     } catch (error) {
       console.error('Logout failed:', error);
     } finally {
+=======
+      await userLogout(); // 调用 API
+    } catch (error) {
+      console.error('Logout failed:', error);
+    } finally {
+      // 移除本地存储的授权信息
+      removeLocalInfo(STORAGE_AUTHORIZE_KEY);
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
       // 清除用户信息
       dispatch(userSlice.actions.clearInfo());
     }

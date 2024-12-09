@@ -13,7 +13,7 @@ function App() {
   const [count, setCount] = useState(0);
   async function handelLogout() {
     await dispatch(logout());
-    navigate("login");
+    navigate("/login");
   }
   function toDdashboard() {
     navigate("/dashboard");

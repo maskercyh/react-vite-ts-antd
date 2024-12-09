@@ -30,9 +30,6 @@ function Layout() {
   const uri = pathname + search;
   const [isLoading, setLoading] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
-  /** 获取用户信息和权限 */
-
-  console.log(1313123);
 
   // 监测是否需要刷新
   useEffect(() => {

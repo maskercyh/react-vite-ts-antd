@@ -7,6 +7,7 @@ export {}
 declare global {
   const Button: typeof import('antd')['Button']
   const Link: typeof import('react-router-dom')['Link']
+  const Loading: typeof import('../src/components/Loading')['default']
   const NavLink: typeof import('react-router-dom')['NavLink']
   const Navigate: typeof import('react-router-dom')['Navigate']
   const Outlet: typeof import('react-router-dom')['Outlet']
@@ -50,6 +51,7 @@ declare global {
   const stores: typeof import('../src/stores/index')['default']
   const switchTabsLang: typeof import('../src/stores/tabs')['switchTabsLang']
   const tabs: typeof import('../src/stores/tabs')['default']
+  const theme: typeof import('antd')['theme']
   const toggleCollapsed: typeof import('../src/stores/menu')['toggleCollapsed']
   const toggleLock: typeof import('../src/stores/tabs')['toggleLock']
   const toggleMaximize: typeof import('../src/stores/tabs')['toggleMaximize']

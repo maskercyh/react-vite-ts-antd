@@ -7,11 +7,7 @@ export {}
 declare global {
   const Button: typeof import('antd')['Button']
   const Link: typeof import('react-router-dom')['Link']
-<<<<<<< HEAD
-  const Loading: typeof import('../src/components/loading')['Loading']
-=======
   const Loading: typeof import('../src/components/Loading')['default']
->>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
   const NavLink: typeof import('react-router-dom')['NavLink']
   const Navigate: typeof import('react-router-dom')['Navigate']
   const Outlet: typeof import('react-router-dom')['Outlet']

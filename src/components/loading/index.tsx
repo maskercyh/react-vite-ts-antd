@@ -23,4 +23,4 @@ const Loading: React.FC = () => {
   );
 };
 
-export default Loading;
+export default Loading; /* Loading.css */

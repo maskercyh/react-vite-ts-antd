@@ -36,13 +36,15 @@ export const userSlice = createSlice({
       state.permissions = action.payload;
     },
     clearInfo: (state) => {
-      state.menuList = [],
-        state.userInfo = {
-          id: 0,
-          username: '',
-          email: '',
-          phone: ''
-        };
+
+      removeLocalInfo(STORAGE_AUTHORIZE_KEY);
+      state.menuList = [];
+      state.userInfo = {
+        id: 0,
+        username: '',
+        email: '',
+        phone: ''
+      };
     },
   },
 });

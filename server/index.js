@@ -3,7 +3,7 @@ import express from 'express';
 
 const app = express();
 const port = 5000;
-
+var token = ""
 // 示例的 API 路由
 app.get('/api/posts', (req, res) => {
 
@@ -14,9 +14,10 @@ app.get('/api/posts', (req, res) => {
 });
 app.post('/api/login/account', (req, res) => {
     res.status(200);
+    token = 'mock_token_123456'
     res.json({
         data: {
-            token: 'mock_token_123456',
+            token: token,
         }, msg: '', code: 200
     },);
 });
@@ -99,6 +100,7 @@ app.post('/api/user/info', (req, res) => {
         }, msg: '', code: 200
     },);
 });
+
 app.listen(port, () => {
     console.log(`API server is running at http://localhost:${port}`);
 });

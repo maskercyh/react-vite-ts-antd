@@ -2,6 +2,7 @@ import { useState } from "react";
 import reactLogo from "@/assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./index.css";
+
 import { logout } from "~@/stores/user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ function App() {
   function toDdashboard() {
     navigate("/dashboard");
   }
+
   return (
     <>
       <div>
@@ -35,6 +37,7 @@ function App() {
         <button className="mt-25px margin-auto" onClick={toDdashboard}>
           toDdashboard
         </button>
+
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>

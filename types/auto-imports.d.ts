@@ -7,7 +7,11 @@ export {}
 declare global {
   const Button: typeof import('antd')['Button']
   const Link: typeof import('react-router-dom')['Link']
+<<<<<<< HEAD
+  const Loading: typeof import('../src/components/loading')['Loading']
+=======
   const Loading: typeof import('../src/components/Loading')['default']
+>>>>>>> 1b537fcc2013b31ee2f1bd5be23e0638ef6b57ae
   const NavLink: typeof import('react-router-dom')['NavLink']
   const Navigate: typeof import('react-router-dom')['Navigate']
   const Outlet: typeof import('react-router-dom')['Outlet']
@@ -26,8 +30,10 @@ declare global {
   const createRef: typeof import('react')['createRef']
   const forwardRef: typeof import('react')['forwardRef']
   const lazy: typeof import('react')['lazy']
+  const loading: typeof import('../src/components/loading')['default']
   const login: typeof import('../src/composables/authorization')['login']
   const logout: typeof import('../src/stores/user')['logout']
+  const logoutAsync: typeof import('../src/stores/userSlice')['logoutAsync']
   const lsLocaleState: typeof import('../src/composables/i18n-locale')['lsLocaleState']
   const memo: typeof import('react')['memo']
   const menu: typeof import('../src/stores/menu')['default']

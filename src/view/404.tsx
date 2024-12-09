@@ -23,12 +23,12 @@ function NotFound() {
       <p className="w-full text-20px font-bold mt-15px text-dark-700">
         当前页面无法访问，可能没权限或已删除
       </p>
-      <Button className="mt-25px margin-auto" onClick={handelLogout}>
+      <button className="mt-25px margin-auto" onClick={handelLogout}>
         退出登录
-      </Button>
-      <Button className="mt-25px margin-auto" onClick={goIndex}>
+      </button>
+      <button className="mt-25px margin-auto" onClick={goIndex}>
         返回首页
-      </Button>
+      </button>
     </div>
   );
 }

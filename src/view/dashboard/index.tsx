@@ -6,11 +6,6 @@ import Bar from "./components/Bar";
 import Line from "./components/Line";
 import Block from "./components/Block";
 
-// 初始化搜索
-const initSearch = {
-  pay_date: ["2022-10-19", "2022-10-29"],
-};
-
 function Dashboard() {
   return <div>dashboard</div>;
 }

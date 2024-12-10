@@ -1,4 +1,4 @@
 import type { LayoutSetting } from "@/stores/app"
 export default {
-    route: 'browser'
+    route: 'hash' //browser
 } as LayoutSetting

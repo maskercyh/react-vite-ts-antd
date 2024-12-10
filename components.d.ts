@@ -5,4 +5,6 @@ declare global{
 	const LazyLoad: typeof import('./src/utils/LazyLoad')['default']
 	const NotFound: typeof import('./src/view/404')['default']
 	const Dashboard: typeof import('./src/view/dashboard/index')['default']
+	const button: typeof import('./src/view/components/basic/button')['default']
+	const chart: typeof import('./src/view/components/basic/chart')['default']
 }

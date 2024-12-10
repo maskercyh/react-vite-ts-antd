@@ -1,11 +1,9 @@
-import { memo } from "react";
 import type { FC, ReactNode } from "react";
-import { useCallback, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { STORAGE_AUTHORIZE_KEY } from "@/composables/authorization";
 import { getLocalInfo } from "@/utils/local";
 import type { AppDispatch } from "@/stores";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getUserInfo } from "@/api/user";
 import Loading from "~@/components/Loading";
 import { setPermissions, setUserInfo, setRouteList } from "@/stores/user";
@@ -16,6 +14,7 @@ interface IProps {
 }
 
 const BeforeRouter: FC<IProps> = ({ children }) => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const token = getLocalInfo(STORAGE_AUTHORIZE_KEY);
   const [loading, setLoading] = useState(true);
@@ -41,12 +40,11 @@ const BeforeRouter: FC<IProps> = ({ children }) => {
   }, [token, dispatch]);
 
   if (!token && pathname !== "/login") {
-    return <Navigate to="/login" />;
+    return navigate("/login");
   } else {
     if (loading) {
       return <Loading />;
     }
-    <Navigate to="/index" />;
     return children;
   }
 };

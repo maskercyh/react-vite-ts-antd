@@ -8,7 +8,9 @@ import type { AppDispatch } from "@/stores";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserInfo } from "@/api/user";
 import Loading from "~@/components/Loading";
-import { setMenuList, setPermissions, setUserInfo } from "@/stores/user";
+import { setPermissions, setUserInfo, setRouteList } from "@/stores/user";
+import { setMenuList } from "@/stores/menu";
+import { toRoute, toMenu } from "@/utils/menu";
 interface IProps {
   children?: ReactNode;
 }
@@ -26,7 +28,8 @@ const BeforeRouter: FC<IProps> = ({ children }) => {
         if (Number(code) !== 200) return;
         const { user, permissions, menuList } = data;
         dispatch(setUserInfo(user));
-        dispatch(setMenuList(menuList || []));
+        dispatch(setRouteList(toRoute(menuList) || []));
+        dispatch(setMenuList(toMenu(menuList) || []));
         dispatch(setPermissions(permissions));
 
         setLoading(false);

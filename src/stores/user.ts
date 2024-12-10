@@ -3,18 +3,26 @@ import { setLocalInfo, getLocalInfo, removeLocalInfo } from '@/utils/local';
 import { STORAGE_AUTHORIZE_KEY } from '@/composables/authorization';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userLogout } from "@/api/user";
+import { RouteType } from '#/menu'
+
+interface UserData {
+  token: string;
+  permissions: string[];
+  userInfo: any
+  routeList: RouteType[];
+}
 
 // 初始化状态
-const initialState = {
+const initialState: UserData = {
   permissions: [],
   token: '',
   userInfo: {
-    id: 0,
+    id: "",
     username: '',
     email: '',
     phone: ''
   },
-  menuList: [],
+  routeList: [],
 };
 
 // 创建切片
@@ -22,8 +30,8 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setMenuList: (state, action) => {
-      state.menuList = action.payload;
+    setRouteList: (state, action) => {
+      state.routeList = action.payload
     },
     setToken: (state, action) => {
       state.token = action.payload;
@@ -36,11 +44,10 @@ export const userSlice = createSlice({
       state.permissions = action.payload;
     },
     clearInfo: (state) => {
-
       removeLocalInfo(STORAGE_AUTHORIZE_KEY);
-      state.menuList = [];
+      state.routeList = [];
       state.userInfo = {
-        id: 0,
+        id: "",
         username: '',
         email: '',
         phone: ''
@@ -70,7 +77,7 @@ export const {
   setUserInfo,
   setPermissions,
   clearInfo,
-  setMenuList,
+  setRouteList,
   setToken,
 } = userSlice.actions;
 

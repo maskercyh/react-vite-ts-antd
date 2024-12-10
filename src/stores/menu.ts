@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import type { MenuType } from "#/menu"
 interface MenuState {
   isPhone: boolean;
   isCollapsed: boolean;
   selectedKeys: string;
   openKeys: string[];
-  menuList: any[]; // 假设 `SideMenu` 类型定义
+  menuList: MenuType[]; // 假设 `SideMenu` 类型定义
 }
 
 const initialState: MenuState = {
@@ -20,6 +20,9 @@ const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
+    setMenuList: (state, action) => {
+      state.menuList = action.payload;
+    },
     toggleCollapsed: (state, action: PayloadAction<boolean>) => {
       state.isCollapsed = action.payload;
     },
@@ -36,6 +39,6 @@ const menuSlice = createSlice({
   },
 });
 
-export const { toggleCollapsed, togglePhone, setSelectedKeys, setOpenKeys } = menuSlice.actions;
+export const { toggleCollapsed, togglePhone, setSelectedKeys, setOpenKeys, setMenuList } = menuSlice.actions;
 
 export default menuSlice.reducer;

@@ -1,18 +1,16 @@
 import { Suspense, lazy } from "react";
-import loadable from "@loadable/component";
-const loadables: any = loadable;
 const pages: Record<string, () => Promise<any>> = import.meta.glob(
   "../view/**/*.tsx"
 );
 function LazyLoad(url: string) {
-  const loadComponent = pages[`../view/${url}.tsx`];
-  const ComponentNode = lazy(() => loadComponent());
-  // const ComponentNode = loadables(async () => {
-  //   return pages[`../view/${url}.tsx`]();
-  // });
+  if (!url) {
+    return <></>;
+  }
+  const loadElement = pages[`../view/${url}.tsx`];
+  const ElementNode = lazy(() => loadElement());
   return (
     <Suspense>
-      <ComponentNode />
+      <ElementNode />
     </Suspense>
   );
 }

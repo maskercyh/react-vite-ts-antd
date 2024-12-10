@@ -3,28 +3,19 @@ import { lazy, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import type { RouteObject } from "react-router-dom";
 import baseRoutes from "./baseRouter";
-import NotFound from "~@/view/404";
-import Loading from "~@/components/Loading";
+import { useCommonStore } from "@/stores";
 // 动态导入页面
 const pages: Record<string, () => Promise<any>> = import.meta.glob(
   "../view/**/*.tsx"
 );
 
 function GenRoute() {
-  const menuList = useSelector((state: any) => state.user.menuList);
+  const { routeList } = useCommonStore();
   const [dynamicRoutes, setDynamicRoutes] = useState<RouteObject[]>([]); // 存储动态路由配置
-  // 监听 menuList 更新
+  // 监听 routeList 更新
   useEffect(() => {
-    const generatedRoutes = menuList.map((item: any) => {
-      const loadComponent = pages[`../view/${item.element}.tsx`];
-      const Component = lazy(() => loadComponent());
-      return {
-        path: item.path,
-        element: <Component />,
-      };
-    });
-    setDynamicRoutes(generatedRoutes);
-  }, [menuList]);
+    setDynamicRoutes(routeList);
+  }, [routeList]);
 
   const routes: any = [
     {
@@ -33,6 +24,7 @@ function GenRoute() {
     },
     ...baseRoutes.slice(1),
   ];
+  console.log(routes);
   const element = useRoutes(routes);
 
   return <>{element}</>;

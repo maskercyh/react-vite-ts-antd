@@ -57,9 +57,11 @@ function Layout() {
   return (
     <div id="layout" className={`flex`}>
       <Menu />
-      {/* <KeepAlive id={uri} name={uri} enabled={false}> */}
-      <Outlet />
-      {/* </KeepAlive> */}
+      <div>
+        <KeepAlive id={uri} name={uri}>
+          <Outlet />
+        </KeepAlive>
+      </div>
     </div>
   );
 }

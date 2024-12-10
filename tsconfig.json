@@ -45,7 +45,8 @@
   ],
   "include": [
     "src",
-    "server"
+    "server",
+    "types/**/*.d.ts"
   ],
   "references": [
     {

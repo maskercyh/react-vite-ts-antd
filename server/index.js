@@ -33,32 +33,51 @@ app.post('/api/user/info', (req, res) => {
     res.json({
         data: {
             menuList: [
-                // {layoutRoute: [
                 {
                     "label": "首页",
-                    "labelEn": "Index",
-                    "icon": "la:tachometer-alt",
+                    "key": "index",
+                    "icon": "SlackSquareOutlined",
                     "path": "/index",
-                    "element": "index/index"
+                    "element": "index/index",
+
                 },
                 {
-                    "label": "dashboard",
-                    "labelEn": "dashboard",
-                    "icon": "la:tachometer-alt",
+                    "label": "仪表盘",
+                    "key": "dashboard",
+                    "icon": "SlackSquareOutlined",
                     "path": "/dashboard",
-                    "element": "dashboard/index"
+                    "element": "dashboard/index",
                 },
-                // ],
-                // route: [
-                // {
-                //     "label": "404",
-                //     "labelEn": "404",
-                //     "icon": "la:tachometer-alt",
-                //     "path": "*",
-                //     "element": "404"
-                // }
-                // ]
-                // },
+                {
+                    "label": "组件",
+                    "key": "components",
+                    "icon": "SlackSquareOutlined",
+                    "path": "/dashboard",
+                    "children": [
+                        {
+                            "label": "基础",
+                            "key": "basic",
+                            "icon": "SlackSquareOutlined",
+                            // "type": "group",
+                            "children": [
+                                {
+                                    "label": "按钮",
+                                    "key": "button",
+                                    "icon": "SlackSquareOutlined",
+                                    "path": "/components/basic/button",
+                                    "element": "components/basic/button",
+                                },
+                                {
+                                    "label": "chart",
+                                    "key": "chart",
+                                    "icon": "SlackSquareOutlined",
+                                    "path": "/components/basic/chart",
+                                    "element": "components/basic/chart",
+                                }
+                            ]
+                        },
+                    ],
+                }
             ],
             user: {
                 userName: '123'

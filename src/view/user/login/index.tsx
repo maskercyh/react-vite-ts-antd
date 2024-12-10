@@ -1,6 +1,5 @@
 import { LockOutlined, MobileOutlined, UserOutlined } from "@ant-design/icons";
 import { login } from "@/api/login";
-import { getUserInfo } from "@/api/user";
 import {
   LoginForm,
   ProFormCaptcha,
@@ -15,12 +14,7 @@ import Footer from "~@/components/Footer";
 import { Alert, message, Tabs } from "antd";
 import { createStyles } from "antd-style";
 import React, { useEffect, useState } from "react";
-import {
-  setMenuList,
-  setToken,
-  setPermissions,
-  setUserInfo,
-} from "@/stores/user";
+import { setToken } from "@/stores/user";
 import { useNavigate } from "react-router-dom";
 import { useCommonStore } from "@/stores";
 
@@ -85,30 +79,11 @@ const Login: React.FC = () => {
   useEffect(() => {
     // 如果存在token，则直接进入页面
     if (token) {
-      // 如果不存在缓存则获取权限
-      if (!permissions.length) {
-        fetchUserInfo();
-      } else {
-        // 有权限则直接跳转
-        navigate("/index");
-      }
+      navigate("/index");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { styles } = useStyles();
-  // const intl = useIntl();
-
-  const fetchUserInfo = async () => {
-    const { code, data } = await getUserInfo();
-    if (code == 200) {
-      const { user, permissions, menuList } = data;
-      dispatch(setMenuList(menuList));
-      dispatch(setUserInfo(user));
-      dispatch(setPermissions(permissions));
-      navigate("/index");
-    }
-  };
 
   const handleSubmit = async (values: any) => {
     try {
@@ -116,7 +91,7 @@ const Login: React.FC = () => {
       const { code, data } = await login(values);
       if (Number(code) !== 200) return;
       dispatch(setToken(data.token));
-      await fetchUserInfo();
+      navigate("/index");
     } finally {
       setLoading(false);
     }

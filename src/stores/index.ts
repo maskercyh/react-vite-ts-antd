@@ -13,7 +13,10 @@ export const store = configureStore({
         menu: menuReducer,
         tabs: tabsReducer,
         user: userReducer,
-    }
+    },
+    middleware: getDefaultMiddleware => getDefaultMiddleware({
+        serializableCheck: false
+    })
 });
 
 /**
@@ -50,8 +53,11 @@ export const useCommonStore = () => {
     const theme = useSelector((state: RootState) => state.public.theme);
     // 菜单数据
     const menuList = useSelector((state: RootState) => state.menu.menuList);
+    // 路由
+    const routeList = useSelector((state: RootState) => state.user.routeList);
 
     return {
+        routeList,
         token,
         isMaximize,
         isCollapsed,

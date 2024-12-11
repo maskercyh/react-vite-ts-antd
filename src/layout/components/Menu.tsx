@@ -1,8 +1,9 @@
 import type { MenuProps } from "antd";
 import { useCommonStore } from "@/stores";
 import { findParentMenuKey } from "@/utils/menu";
+import styles from "../index.module.less";
 const App: React.FC = () => {
-  const { menuList, routeList } = useCommonStore();
+  const { menuList, routeList, isCollapsed } = useCommonStore();
   const { pathname } = useLocation();
   const [selectKey, setSelectKey] = useState<string>("");
   const [openKeys, setopenKeys] = useState<string[]>([]);
@@ -32,15 +33,22 @@ const App: React.FC = () => {
   };
 
   return (
-    <Menu
-      onClick={onClick}
-      style={{ width: 256 }}
-      selectedKeys={[selectKey]}
-      openKeys={openKeys}
-      onOpenChange={onOpenChange}
-      mode="inline"
-      items={menuList}
-    />
+    <div
+      className={`
+        ${styles.menu}
+        ${isCollapsed ? styles.menuCollapsed : ""}
+      `}
+    >
+      <Menu
+        onClick={onClick}
+        selectedKeys={[selectKey]}
+        inlineCollapsed={isCollapsed}
+        openKeys={openKeys}
+        onOpenChange={onOpenChange}
+        mode="inline"
+        items={menuList}
+      />
+    </div>
   );
 };
 

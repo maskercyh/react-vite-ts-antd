@@ -1,0 +1,19 @@
+@layoutLeft: 266px;
+
+:root {
+  --el-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s,
+    color 0.1s, font-size 0s;
+  --el-left-menu-width: @layoutLeft; // 使用 LESS 变量设置 CSS 变量
+  --el-left-menu-collapse: 80px;
+  --el-font-size-small: 12px;
+  --el-font-size-default: 14px;
+  --el-font-size-big: 16px;
+  --el-font-size-bigger: 18px;
+  --el-background-color: #f6f8f9;
+  --el-color-grey: rgba(0, 0, 0, 0.65);
+  --el-color-black: rgba(0, 0, 0, 0.75);
+}
+[data-theme="dark"] {
+  --background-color: #333;
+  --text-color: white;
+}

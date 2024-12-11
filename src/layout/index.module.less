@@ -1,0 +1,33 @@
+@import url("@/assets/styles/default.less");
+
+.app-layout {
+  height: 100%;
+
+  .app-container-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: var(--el-left-menu-width);
+      transition: var(--el-transition);
+      background: var(--background-color);
+    }
+    .menuCollapsed {
+      width: var(--el-left-menu-collapse) !important;
+    }
+
+    .app-main {
+      position: relative;
+      transition: var(--el-transition);
+      margin-left: var(--el-left-menu-width);
+    }
+    .is-collapse-main {
+      margin-left: var(--el-left-menu-collapse);
+    }
+  }
+}

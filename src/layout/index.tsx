@@ -8,7 +8,7 @@ import { debounce } from "lodash";
 import Menu from "./components/Menu";
 import Header from "./components/Header";
 import { KeepAlive } from "react-activation";
-
+import styles from "./index.module.less";
 function Layout() {
   const { menuList, isMaximize, isCollapsed, isPhone, isRefresh } =
     useCommonStore();
@@ -42,13 +42,20 @@ function Layout() {
     };
   }, []);
   return (
-    <div id="layout" className={`app-container flex`}>
-      <Menu />
-      <div className={`app-main`}>
-        <Header />
-        <KeepAlive id={uri} name={uri}>
-          <Outlet />
-        </KeepAlive>
+    <div className={`${styles["app-layout"]}`}>
+      <div className={`${styles["app-container-wrap"]}`}>
+        <Menu />
+        <div
+          className={`
+          ${styles["app-main"]} 
+          ${isCollapsed ? styles["is-collapse-main"] : ""}
+          `}
+        >
+          <Header />
+          <KeepAlive id={uri} name={uri}>
+            <Outlet />
+          </KeepAlive>
+        </div>
       </div>
     </div>
   );

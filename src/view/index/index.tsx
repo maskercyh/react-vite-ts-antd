@@ -2,12 +2,12 @@ import { useState } from "react";
 import reactLogo from "@/assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./index.css";
-
 import { logout } from "~@/stores/user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import type { AppDispatch } from "@/stores";
 function App() {
+  const { RangePicker } = DatePicker;
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [count, setCount] = useState(0);
@@ -18,9 +18,9 @@ function App() {
   function toDdashboard() {
     navigate("/dashboard");
   }
-
   return (
     <>
+      <RangePicker />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

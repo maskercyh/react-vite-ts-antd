@@ -7,6 +7,7 @@ export {}
 declare global {
   const Breadcrumb: typeof import('antd')['Breadcrumb']
   const Button: typeof import('antd')['Button']
+  const DatePicker: typeof import('antd')['DatePicker']
   const Link: typeof import('react-router-dom')['Link']
   const Loading: typeof import('../src/components/Loading')['default']
   const Menu: typeof import('antd')['Menu']

@@ -1,12 +1,14 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
 // import { AxiosLoading } from './loading'
-import { STORAGE_AUTHORIZE_KEY } from '@/composables/authorization'
+import { STORAGE_AUTHORIZE_KEY, LANG } from '@/stores/public'
+import { setLocalInfo, getLocalInfo, removeLocalInfo } from '@/utils/local';
 import { ContentTypeEnum, RequestEnum } from '~#/http-enum'
 // import { useSelector } from 'react-redux';
 // import { RootState } from '@/stores';
 import { logout } from '@/stores/user';
 import { notification as notificationInfo } from 'antd'
+import { useDispatch } from 'react-redux';
 // const token = useSelector((state: RootState) => state.auth.token);
 // import router from '~/router'
 
@@ -38,15 +40,14 @@ async function requestHandler(config: InternalAxiosRequestConfig & RequestConfig
     //  替换url的请求前缀baseUrl
     config.baseURL = import.meta.env.VITE_APP_BASE_API_DEV
   }
-
-  // if (token && config.token !== false)
-  //   config.headers.set(STORAGE_AUTHORIZE_KEY, token)
+  const token = getLocalInfo(STORAGE_AUTHORIZE_KEY)
+  if (token && config.token !== false)
+    config.headers.set(STORAGE_AUTHORIZE_KEY, token)
 
   // 增加多语言的配置
-  // const { locale } = useI18nLocale()
-  // config.headers.set('Accept-Language', locale.value ?? 'zh-CN')
-  // if (config.loading)
-  // axiosLoading.addLoading()
+  const locale = localStorage.getItem(LANG);
+  if (locale)
+    config.headers.set('Accept-Language', locale ?? 'zh-CN')
   return config
 }
 
@@ -54,10 +55,10 @@ function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> 
   return response.data
 }
 
-function errorHandler(error: AxiosError): Promise<any> {
-  const [notification] = notificationInfo.useNotification();
-
+async function errorHandler(error: AxiosError): Promise<any> {
   if (error.response) {
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch()
     const { data, status, statusText } = error.response as AxiosResponse<ResponseBody>
     if (status === 401) {
       notification?.info({
@@ -65,7 +66,11 @@ function errorHandler(error: AxiosError): Promise<any> {
         description: data?.msg || statusText,
         duration: 3,
       })
-      logout()
+      localStorage.setItem(STORAGE_AUTHORIZE_KEY, "");
+      // console.log(123123)
+      // await dispatch(logout());
+      // console.log(123123)
+      // navigate('/login')
       /**
        * 这里处理清空用户信息和token的逻辑，后续扩展
        */
@@ -120,11 +125,11 @@ function instancePromise<R = any, T = any>(options: AxiosOptions<T> & RequestCon
       resolve(res as any)
     }).catch((e: Error | AxiosError) => {
       reject(e)
+    }).finally(() => {
+      // if (loading)
+      // axiosLoading.closeLoading()
     })
-      .finally(() => {
-        // if (loading)
-        // axiosLoading.closeLoading()
-      })
+
   })
 }
 export function useGet<R = any, T = any>(url: string, params?: T, config?: AxiosRequestConfig & RequestConfigExtra): Promise<ResponseBody<R>> {

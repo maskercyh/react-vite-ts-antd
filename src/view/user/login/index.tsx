@@ -6,7 +6,7 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from "@ant-design/pro-components";
-import { STORAGE_AUTHORIZE_KEY } from "@/composables/authorization";
+import { STORAGE_AUTHORIZE_KEY } from "@/stores/public";
 import { getLocalInfo } from "@/utils/local";
 import type { AppDispatch } from "@/stores";
 import { useDispatch } from "react-redux";

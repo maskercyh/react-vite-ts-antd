@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import defaultSetting from "@/config/default-setting"
-import type { LayoutSetting } from '#/public'
-export type ThemeType = 'dark' | 'light'
-
+import type { LayoutSetting, ThemeType } from '#/public'
+export const STORAGE_AUTHORIZE_KEY = 'Authorization'
+export const LAYOUT_KEY = 'layout'
+export const THEME_KEY = 'theme'
+export const LANG = 'lng'
 export const publicSlice = createSlice({
   name: 'public',
   initialState: {

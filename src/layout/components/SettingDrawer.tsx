@@ -3,7 +3,9 @@ import { SettingOutlined } from "@ant-design/icons";
 import { Button, Drawer } from "antd";
 import styles from "../index.module.less";
 import { useDispatch } from "react-redux";
-import { setLayout, setColorPrimary } from "@/stores/public";
+import Theme from "@/components/Theme";
+import { setLayout, setColorPrimary, LAYOUT_KEY } from "@/stores/public";
+import type { Layout } from "#/public";
 import type { AppDispatch } from "@/stores";
 const SettingDrawer: React.FC = () => {
   const { configSetting } = useCommonStore();
@@ -17,19 +19,21 @@ const SettingDrawer: React.FC = () => {
   const themeColorSet = (params: any) => () => {
     dispatch(setColorPrimary(params));
   };
-  const layoutSet = (params: "top" | "side" | "mix") => () => {
+  const layoutSet = (params: Layout) => () => {
+    localStorage.setItem(LAYOUT_KEY, params);
     dispatch(setLayout(params));
   };
 
   return (
     <div>
       <div
+        onClick={show}
         className={`
             ${styles["app-drawer-setting-handle"]}
             `}
         style={{ backgroundColor: configSetting.colorPrimary }}
       >
-        <SettingOutlined style={{ fontSize: "20px" }} onClick={show} />
+        <SettingOutlined style={{ fontSize: "20px" }} />
       </div>
       <Drawer
         closable
@@ -39,6 +43,7 @@ const SettingDrawer: React.FC = () => {
         open={open}
         onClose={() => setOpen(false)}
       >
+        <Theme />
         <Button
           type="primary"
           style={{ marginBottom: 16 }}

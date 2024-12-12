@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { setLocalInfo, getLocalInfo, removeLocalInfo } from '@/utils/local';
-import { STORAGE_AUTHORIZE_KEY } from '@/composables/authorization';
+import { STORAGE_AUTHORIZE_KEY } from '@/stores/public';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userLogout } from "@/api/user";
 import { RouteType } from '#/menu'

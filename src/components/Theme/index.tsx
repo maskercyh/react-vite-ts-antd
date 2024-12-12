@@ -1,34 +1,28 @@
 import type { AppDispatch } from "@/stores";
-import { ThemeType, setThemeValue } from "@/stores/public";
+import { setThemeValue, THEME_KEY } from "@/stores/public";
+import type { ThemeType } from "#/public";
 import { Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useAliveController } from "react-activation";
-
 function Theme() {
-  const THEME_KEY = "light";
   const { t } = useTranslation();
   const { clear, refresh, getCachingNodes } = useAliveController();
   const dispatch: AppDispatch = useDispatch();
-  const themeCache = (localStorage.getItem(THEME_KEY) || "light") as ThemeType;
+  const themeCache = (localStorage.getItem(THEME_KEY) || "theme") as ThemeType;
   const [theme, setTheme] = useState<ThemeType>(themeCache);
 
   useEffect(() => {
     if (!themeCache) {
       localStorage.setItem(THEME_KEY, "light");
     }
-    if (themeCache === "dark") {
-      document.body.className = "theme-dark";
-    }
-    dispatch(setThemeValue(themeCache === "dark" ? "dark" : "light"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setTheme(themeCache === "dark" ? "dark" : "light");
   }, [themeCache]);
 
   /** 刷新全部keepalive */
   const refreshAllKeepalive = () => {
     const cacheNodes = getCachingNodes();
-
     for (let i = 0; i < cacheNodes?.length; i++) {
       const { name } = cacheNodes[i];
       if (name) refresh(name);
@@ -43,17 +37,15 @@ function Theme() {
     localStorage.setItem(THEME_KEY, type);
     dispatch(setThemeValue(type));
     setTheme(type);
-
     clear();
     refreshAllKeepalive();
-
     switch (type) {
       case "dark":
-        document.body.className = "theme-dark";
+        document.documentElement.className = "dark";
         break;
 
       default:
-        document.body.className = "theme-primary";
+        document.documentElement.className = "light";
         break;
     }
   };
@@ -61,20 +53,17 @@ function Theme() {
   return (
     <Tooltip title={t("public.themes")}>
       <div className="flex items-center justify-center text-lg mr-4 cursor-pointer">
+        {theme}
+        {theme === "light"}
         {theme === "light" && (
-          <button
-            icon="mdi-white-balance-sunny"
-            onClick={() => onChange("dark")}
-          >
-            1
-          </button>
+          <button onClick={() => onChange("dark")}>dark</button>
         )}
         {theme !== "light" && (
           <button
             icon="mdi-moon-waning-crescent"
             onClick={() => onChange("light")}
           >
-            2
+            light
           </button>
         )}
       </div>

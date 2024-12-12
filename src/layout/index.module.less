@@ -15,7 +15,51 @@
       bottom: 0;
       width: var(--el-left-menu-width);
       transition: var(--el-transition);
-      background: var(--background-color);
+      background: var(--bg-color);
+      box-shadow: var(--box-shadow);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+      z-index: var(--el-zindex-top);
+      border-right: 1px solid rgba(5, 5, 5, 0.06);
+      .side-bar-logo {
+        padding: var(--el-padding);
+      }
+      .side-bar-menu {
+        background: var(--bg-color);
+        &::-webkit-scrollbar {
+          width: 5px;
+          height: 10px;
+        }
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 5px rgba(227, 227, 227, 0.2);
+          border-radius: 0;
+          background: rgba(0, 0, 0, 0.1);
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 5px;
+          -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+          background: rgba(190, 190, 190, 0.2);
+        }
+        .side-bar-menu-list {
+          border-right: none !important;
+        }
+      }
+      .side-bar-collapsed-box {
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        .side-bar-collapsed-button {
+          margin-inline: 4px;
+          margin-block: 4px;
+          border-radius: 6px;
+          padding: 0 var(--el-padding);
+          height: 40px;
+          line-height: 40px;
+          &:hover {
+            background: var(--hover-color);
+          }
+        }
+      }
     }
     .side-bar-collapsed {
       width: var(--el-left-menu-collapse) !important;
@@ -24,10 +68,15 @@
     .app-main-wrap {
       position: relative;
       transition: var(--el-transition);
-
+      min-height: 100%;
       margin: 0 auto;
+      display: flex;
+      flex: auto;
+      flex-direction: column;
       .app-main {
         padding: var(--el-padding);
+        overflow: hidden;
+        flex: auto;
       }
     }
     .app-main-side-menu.is-collapse-main {
@@ -37,9 +86,31 @@
       margin-left: var(--el-left-menu-width);
     }
 
-    .haeder-container {
+    .header-container {
       padding-left: var(--el-padding);
       padding-right: var(--el-padding);
+      display: flex;
+      background: var(--bg-color);
+      justify-content: space-between;
+      height: var(--el-nav-height);
+      box-shadow: var(--box-shadow);
+      .header-left,
+      .header-right {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        > div {
+          padding: 0 calc(var(--el-padding) / 2);
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-items: center;
+          cursor: pointer;
+          &:hover {
+            background: var(--hover-color);
+          }
+        }
+      }
     }
   }
   .app-drawer-setting-handle {

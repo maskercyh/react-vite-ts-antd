@@ -30,6 +30,10 @@ app.post('/api/user/logout', (req, res) => {
 });
 app.post('/api/user/info', (req, res) => {
     res.status(200);
+    // const token = req.headers['authorization']
+    // if (token != '12312') {
+    //     res.status(401);
+    // }
     res.json({
         data: {
             menuList: [
@@ -70,6 +74,36 @@ app.post('/api/user/info', (req, res) => {
                                 {
                                     "label": "chart",
                                     "key": "chart",
+                                    "icon": "SlackSquareOutlined",
+                                    "path": "/components/basic/chart",
+                                    "element": "components/basic/chart",
+                                }
+                            ]
+                        },
+                    ],
+                },
+                {
+                    "label": "组件",
+                    "key": "components1",
+                    "icon": "SlackSquareOutlined",
+                    "path": "/dashboard",
+                    "children": [
+                        {
+                            "label": "基础",
+                            "key": "basic1",
+                            "icon": "SlackSquareOutlined",
+                            // "type": "group",
+                            "children": [
+                                {
+                                    "label": "按钮",
+                                    "key": "button1",
+                                    "icon": "SlackSquareOutlined",
+                                    "path": "/components/basic/button",
+                                    "element": "components/basic/button",
+                                },
+                                {
+                                    "label": "chart",
+                                    "key": "chart1",
                                     "icon": "SlackSquareOutlined",
                                     "path": "/components/basic/chart",
                                     "element": "components/basic/chart",

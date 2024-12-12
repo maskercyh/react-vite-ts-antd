@@ -10,6 +10,7 @@ import SideMenu from "./components/SideMenu";
 import Header from "./components/Header";
 import { KeepAlive } from "react-activation";
 import styles from "./index.module.less";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Layout() {
   const {
@@ -51,14 +52,13 @@ function Layout() {
   }, []);
   return (
     <div className={`${styles["app-layout"]}`}>
-      <div
+      <section
         className={`
           ${styles["app-container-wrap"]}
-         
         `}
       >
         {configSetting.layout == "side" && <SideMenu />}
-        <div
+        <section
           className={`
             ${styles["app-main-wrap"]} 
             ${configSetting.layout == "side" && styles["app-main-side-menu"]}
@@ -66,17 +66,27 @@ function Layout() {
           `}
         >
           <Header />
-          <div
+          <main
             className={`
               ${styles["app-main"]}
             `}
           >
-            <KeepAlive id={uri} name={uri}>
-              <Outlet />
-            </KeepAlive>
-          </div>
-        </div>
-      </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={uri}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <KeepAlive id={uri} name={uri}>
+                  <Outlet />
+                </KeepAlive>
+              </motion.div>
+            </AnimatePresence>
+          </main>
+        </section>
+      </section>
       {configSetting.drawerSetting && <SettingDrawer />}
     </div>
   );

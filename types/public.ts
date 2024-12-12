@@ -1,13 +1,14 @@
 import { ItemType } from 'antd/es/menu/interface';
 import type { ColumnsType } from 'antd/lib/table';
 
-
+export type LayoutType = 'mix' | 'side' | 'top'
+export type ThemeType = 'dark' | 'light'
 
 export interface LayoutSetting {
   logo?: string
   title?: string
   drawerSetting: boolean
-  layout: 'mix' | 'side' | 'top'
+  layout: LayoutType
   routeType: 'hash' | 'browser'
   themeType?: 'light' | 'dark'
   colorPrimary: string

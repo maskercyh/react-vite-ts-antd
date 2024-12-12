@@ -2,9 +2,14 @@ import type { MenuProps } from "antd";
 import { useCommonStore } from "@/stores";
 import { findParentMenuKey } from "@/utils/menu";
 import styles from "../index.module.less";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "@/stores";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 const App: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   const { menuList, routeList, isCollapsed } = useCommonStore();
   const { pathname } = useLocation();
+
   const [selectKey, setSelectKey] = useState<string>("");
   const [openKeys, setopenKeys] = useState<string[]>([]);
 
@@ -33,22 +38,54 @@ const App: React.FC = () => {
   };
 
   return (
-    <div
+    <aside
       className={`
         ${styles["side-bar"]}
-        ${isCollapsed ? styles["side-bar-collapse"] : ""}
+        ${isCollapsed && styles["side-bar-collapsed"]}
       `}
     >
-      <Menu
-        onClick={onClick}
-        selectedKeys={[selectKey]}
-        inlineCollapsed={isCollapsed}
-        openKeys={openKeys}
-        onOpenChange={onOpenChange}
-        mode="inline"
-        items={menuList}
-      />
-    </div>
+      <div
+        className={`
+        ${styles["side-bar-logo"]}
+      `}
+      >
+        logo
+      </div>
+      <div
+        className={`
+          flex-1 of-x-hidden of-y-auto scrollbar
+          ${styles["side-bar-menu"]}
+        `}
+      >
+        <Menu
+          className={`
+          ${styles["side-bar-menu-list"]}
+        `}
+          onClick={onClick}
+          selectedKeys={[selectKey]}
+          inlineCollapsed={isCollapsed}
+          openKeys={openKeys}
+          onOpenChange={onOpenChange}
+          mode="inline"
+          items={menuList}
+        />
+      </div>
+      <div
+        className={`
+          ${styles["side-bar-collapsed-box"]}
+        `}
+        onClick={() => dispatch(toggleCollapsed(!isCollapsed))}
+      >
+        <div
+          className={`
+            ${styles["side-bar-collapsed-button"]}
+          `}
+        >
+          {isCollapsed && <MenuUnfoldOutlined />}
+          {!isCollapsed && <MenuFoldOutlined />}
+        </div>
+      </div>
+    </aside>
   );
 };
 

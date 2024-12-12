@@ -5,7 +5,7 @@ import { AliveScope } from "react-activation";
 import Loading from "~@/components/Loading";
 import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
-
+import { CSSTransition } from "react-transition-group";
 import GenRoute from "./GenRoute";
 import zhCN from "antd/es/locale/zh_CN";
 import enUS from "antd/es/locale/en_US";

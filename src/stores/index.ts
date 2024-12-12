@@ -23,6 +23,7 @@ export const store = configureStore({
  * 获取常用的状态数据
  */
 export const useCommonStore = () => {
+    const configSetting = useSelector((state: RootState) => state.public)
     //token
     const token = useSelector((state: RootState) => state.user.token);
     // 权限
@@ -57,6 +58,7 @@ export const useCommonStore = () => {
     const routeList = useSelector((state: RootState) => state.user.routeList);
 
     return {
+        configSetting,
         routeList,
         token,
         isMaximize,

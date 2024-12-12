@@ -35,8 +35,8 @@ const App: React.FC = () => {
   return (
     <div
       className={`
-        ${styles.menu}
-        ${isCollapsed ? styles.menuCollapsed : ""}
+        ${styles["side-bar"]}
+        ${isCollapsed ? styles["side-bar-collapse"] : ""}
       `}
     >
       <Menu

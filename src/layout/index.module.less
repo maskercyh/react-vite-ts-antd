@@ -8,7 +8,7 @@
     width: 100%;
     height: 100%;
 
-    .menu {
+    .side-bar {
       position: fixed;
       top: 0;
       left: 0;
@@ -17,17 +17,43 @@
       transition: var(--el-transition);
       background: var(--background-color);
     }
-    .menuCollapsed {
+    .side-bar-collapsed {
       width: var(--el-left-menu-collapse) !important;
     }
 
-    .app-main {
+    .app-main-wrap {
       position: relative;
       transition: var(--el-transition);
-      margin-left: var(--el-left-menu-width);
+
+      margin: 0 auto;
+      .app-main {
+        padding: var(--el-padding);
+      }
     }
-    .is-collapse-main {
+    .app-main-side-menu.is-collapse-main {
       margin-left: var(--el-left-menu-collapse);
     }
+    .app-main-side-menu {
+      margin-left: var(--el-left-menu-width);
+    }
+
+    .haeder-container {
+      padding-left: var(--el-padding);
+      padding-right: var(--el-padding);
+    }
+  }
+  .app-drawer-setting-handle {
+    position: fixed;
+    cursor: pointer;
+    top: 240px;
+    right: 0;
+    font-size: 16px;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-content: center;
+    border-start-start-radius: 6px;
+    border-end-start-radius: 6px;
+    color: #fff;
   }
 }

@@ -5,13 +5,21 @@ import { useLocation } from "react-router-dom";
 import { useCommonStore } from "@/stores";
 import type { AppDispatch } from "@/stores";
 import { debounce } from "lodash";
-import Menu from "./components/Menu";
+import SettingDrawer from "./components/SettingDrawer";
+import SideMenu from "./components/SideMenu";
 import Header from "./components/Header";
 import { KeepAlive } from "react-activation";
 import styles from "./index.module.less";
+
 function Layout() {
-  const { menuList, isMaximize, isCollapsed, isPhone, isRefresh } =
-    useCommonStore();
+  const {
+    menuList,
+    isMaximize,
+    isCollapsed,
+    isPhone,
+    isRefresh,
+    configSetting,
+  } = useCommonStore();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const { pathname, search } = useLocation();
@@ -43,20 +51,33 @@ function Layout() {
   }, []);
   return (
     <div className={`${styles["app-layout"]}`}>
-      <div className={`${styles["app-container-wrap"]}`}>
-        <Menu />
+      <div
+        className={`
+          ${styles["app-container-wrap"]}
+         
+        `}
+      >
+        {configSetting.layout == "side" && <SideMenu />}
         <div
           className={`
-          ${styles["app-main"]} 
-          ${isCollapsed ? styles["is-collapse-main"] : ""}
+            ${styles["app-main-wrap"]} 
+            ${configSetting.layout == "side" && styles["app-main-side-menu"]}
+            ${isCollapsed ? styles["is-collapse-main"] : ""}
           `}
         >
           <Header />
-          <KeepAlive id={uri} name={uri}>
-            <Outlet />
-          </KeepAlive>
+          <div
+            className={`
+              ${styles["app-main"]}
+            `}
+          >
+            <KeepAlive id={uri} name={uri}>
+              <Outlet />
+            </KeepAlive>
+          </div>
         </div>
       </div>
+      {configSetting.drawerSetting && <SettingDrawer />}
     </div>
   );
 }

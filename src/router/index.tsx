@@ -12,18 +12,16 @@ import enUS from "antd/es/locale/en_US";
 const { defaultAlgorithm, darkAlgorithm } = theme;
 
 function AppConent() {
-  const { theme } = useCommonStore();
+  const { theme, configSetting } = useCommonStore();
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
-
   return (
     <ConfigProvider
       locale={currentLanguage === "en" ? enUS : zhCN}
       theme={{
         algorithm: [theme === "dark" ? darkAlgorithm : defaultAlgorithm],
         token: {
-          colorPrimary: "#1DA57A", // 设置主色调为绿色
-          fontSize: 16, // 设置字体大小
+          colorPrimary: configSetting.colorPrimary,
         },
       }}
     >
@@ -40,7 +38,7 @@ function AppConent() {
 
 // 导出组件，基于路由设置选择 HashRouter 或 BrowserRouter
 export default () => {
-  return LayoutSetting.route === "hash" ? (
+  return LayoutSetting.routeType === "hash" ? (
     <HashRouter>
       <AppConent />
     </HashRouter>

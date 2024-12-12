@@ -3,11 +3,16 @@ import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/stores";
 import I18n from "@/components/I18n";
 import Theme from "@/components/Theme";
+import styles from "../index.module.less";
 export default function Header() {
   const { isCollapsed, isMaximize, username, nav } = useCommonStore();
   const dispatch: AppDispatch = useDispatch();
   return (
-    <>
+    <div
+      className={`
+        ${styles["haeder-container"]}
+      `}
+    >
       <div
         className="text-lg cursor-pointer"
         onClick={() => dispatch(toggleCollapsed(!isCollapsed))}
@@ -33,6 +38,6 @@ export default function Header() {
           },
         ]}
       /> */}
-    </>
+    </div>
   );
 }

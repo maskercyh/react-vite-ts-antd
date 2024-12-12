@@ -1,4 +1,9 @@
-import type { LayoutSetting } from "@/stores/app"
+import type { LayoutSetting } from "#/public"
 export default {
-    route: 'hash' //browser
+    layout: "side",
+    drawerSetting: true,
+    routeType: 'hash',
+    themeType: 'light',
+    title: 'RTVA',
+    colorPrimary: '#1677FF'
 } as LayoutSetting

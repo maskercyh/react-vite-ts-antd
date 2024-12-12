@@ -3,7 +3,16 @@ import type { ColumnsType } from 'antd/lib/table';
 
 
 
-
+export interface LayoutSetting {
+  logo?: string
+  title?: string
+  drawerSetting: boolean
+  layout: 'mix' | 'side' | 'top'
+  routeType: 'hash' | 'browser'
+  themeType?: 'light' | 'dark'
+  colorPrimary: string
+  locale?: string
+}
 
 
 

@@ -1,16 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import defaultSetting from "@/config/default-setting"
+import type { LayoutSetting } from '#/public'
 export type ThemeType = 'dark' | 'light'
 
 export const publicSlice = createSlice({
   name: 'public',
   initialState: {
+    ...defaultSetting as LayoutSetting,
     theme: 'light' as ThemeType, // 主题
     isFullscreen: false, // 是否全屏
     isRefresh: false, // 重新加载
     isRefreshPage: false // 重新加载页面
   },
   reducers: {
+    setLayout: (state, action) => {
+      state.layout = action.payload;
+    },
+
+    setColorPrimary: (state, action) => {
+      state.colorPrimary = action.payload;
+    },
     /** 设置主题 */
     setThemeValue: (state, action) => {
       state.theme = action.payload;
@@ -34,7 +43,9 @@ export const {
   setThemeValue,
   setFullscreen,
   setRefresh,
-  setRefreshPage
+  setRefreshPage,
+  setLayout,
+  setColorPrimary
 } = publicSlice.actions;
 
 export default publicSlice.reducer;

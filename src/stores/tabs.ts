@@ -5,9 +5,10 @@ interface NavData {
   labelZh: string;
   labelEn: string;
 }
-interface TabsData extends Omit<TabPaneProps, 'tab'> {
+export interface TabsData extends Omit<TabPaneProps, 'tab'> {
   key: string;
   label: React.ReactNode;
+  path: string
   labelZh: React.ReactNode;
   labelEn: React.ReactNode;
 }

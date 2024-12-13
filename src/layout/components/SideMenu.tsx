@@ -4,10 +4,11 @@ import { findParentMenuKey } from "@/utils/menu";
 import styles from "../index.module.less";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/stores";
+import { setActiveKey, addTabs } from "@/stores/tabs";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { menuList, routeList, isCollapsed } = useCommonStore();
+  const { menuList, routeList, isCollapsed, tabs } = useCommonStore();
   const { pathname } = useLocation();
 
   const [selectKey, setSelectKey] = useState<string>("");
@@ -19,18 +20,17 @@ const App: React.FC = () => {
     const { key, path } = routeList[current];
     setopenKeys(findParentMenuKey(menuList, path));
     setSelectKey(key);
-    console.log(key);
   }, []);
 
   const navigate = useNavigate();
   const onClick: MenuProps["onClick"] = (e) => {
     setopenKeys(e.keyPath);
     setSelectKey(e.key);
-    console.log(e.keyPath);
-    console.log(e);
     const current = routeList.findIndex((item) => item.key === e.key);
     if (current === -1) return;
-    const { path } = routeList[current];
+    const { path, key } = routeList[current];
+    dispatch(addTabs({ key, path }));
+    dispatch(setActiveKey(key));
     navigate(path);
   };
   const onOpenChange: MenuProps["onOpenChange"] = (newOpenKeys) => {

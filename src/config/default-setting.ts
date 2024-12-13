@@ -2,8 +2,9 @@ import type { LayoutSetting } from "#/public"
 export default {
     layout: "side",
     drawerSetting: true,
-    routeType: 'hash',
-    themeType: 'light',
+    routeType: 'browser',
+    theme: 'light',
     title: 'RTVA',
-    colorPrimary: '#1677FF'
+    colorPrimary: '#1677FF',
+    watermark: false,
 } as LayoutSetting

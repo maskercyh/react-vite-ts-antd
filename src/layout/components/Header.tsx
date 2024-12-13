@@ -7,7 +7,7 @@ export default function Header() {
   const { isCollapsed, isMaximize, username, nav } = useCommonStore();
   const dispatch: AppDispatch = useDispatch();
   return (
-    <div
+    <header
       className={`
         ${styles["header-container"]}
       `}
@@ -42,6 +42,6 @@ export default function Header() {
         <LangSelect />
         <UserAvater />
       </div>
-    </div>
+    </header>
   );
 }

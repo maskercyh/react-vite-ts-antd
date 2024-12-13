@@ -56,13 +56,14 @@ app.post('/api/user/info', (req, res) => {
                     "label": "组件",
                     "key": "components",
                     "icon": "SlackSquareOutlined",
-                    "path": "/dashboard",
+                    "path": "/components",
                     "children": [
                         {
                             "label": "基础",
                             "key": "basic",
                             "icon": "SlackSquareOutlined",
                             // "type": "group",
+                            "path": '/components/basic',
                             "children": [
                                 {
                                     "label": "按钮",
@@ -86,26 +87,27 @@ app.post('/api/user/info', (req, res) => {
                     "label": "组件",
                     "key": "components1",
                     "icon": "SlackSquareOutlined",
-                    "path": "/dashboard",
+                    "path": "/components2",
                     "children": [
                         {
                             "label": "基础",
                             "key": "basic1",
                             "icon": "SlackSquareOutlined",
                             // "type": "group",
+                            "path": '/components2/basic1',
                             "children": [
                                 {
                                     "label": "按钮",
                                     "key": "button1",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components/basic/button",
+                                    "path": "/components2/basic/button1",
                                     "element": "components/basic/button",
                                 },
                                 {
                                     "label": "chart",
                                     "key": "chart1",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components/basic/chart",
+                                    "path": "/components2/basic/chart1",
                                     "element": "components/basic/chart",
                                 }
                             ]

@@ -73,6 +73,42 @@
       display: flex;
       flex: auto;
       flex-direction: column;
+      .header-container {
+        padding-left: var(--el-padding);
+        padding-right: var(--el-padding);
+        display: flex;
+        background: var(--bg-color);
+        justify-content: space-between;
+        height: var(--el-nav-height);
+        box-shadow: var(--box-shadow);
+        .header-left,
+        .header-right {
+          display: flex;
+          align-items: center;
+          justify-items: center;
+          > div {
+            padding: 0 calc(var(--el-padding) / 2);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            cursor: pointer;
+            &:hover {
+              background: var(--hover-color);
+            }
+          }
+        }
+      }
+      .tab-top-container {
+        position: relative;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+        min-height: var(--el-tabs-height);
+        padding: 0 var(--el-padding);
+        background: var(--bg-color);
+      }
       .app-main {
         padding: var(--el-padding);
         overflow: hidden;
@@ -84,33 +120,6 @@
     }
     .app-main-side-menu {
       margin-left: var(--el-left-menu-width);
-    }
-
-    .header-container {
-      padding-left: var(--el-padding);
-      padding-right: var(--el-padding);
-      display: flex;
-      background: var(--bg-color);
-      justify-content: space-between;
-      height: var(--el-nav-height);
-      box-shadow: var(--box-shadow);
-      .header-left,
-      .header-right {
-        display: flex;
-        align-items: center;
-        justify-items: center;
-        > div {
-          padding: 0 calc(var(--el-padding) / 2);
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-items: center;
-          cursor: pointer;
-          &:hover {
-            background: var(--hover-color);
-          }
-        }
-      }
     }
   }
   .app-drawer-setting-handle {

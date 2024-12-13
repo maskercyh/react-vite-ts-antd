@@ -7,10 +7,11 @@ export type ThemeType = 'dark' | 'light'
 export interface LayoutSetting {
   logo?: string
   title?: string
+  watermark: boolean
   drawerSetting: boolean
   layout: LayoutType
   routeType: 'hash' | 'browser'
-  themeType?: 'light' | 'dark'
+  theme: 'light' | 'dark'
   colorPrimary: string
   locale?: string
 }

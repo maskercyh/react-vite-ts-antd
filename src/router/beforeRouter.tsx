@@ -30,7 +30,7 @@ const BeforeRouter: FC<ReactNode> = ({ children }) => {
     navigate("/login");
     return;
   }
-  const layout = (localStorage.getItem(LAYOUT_KEY) || "layout") as LayoutType;
+  const layout = (localStorage.getItem(LAYOUT_KEY) || "side") as LayoutType;
   useEffect(() => {
     if (!layout) {
       localStorage.setItem(LAYOUT_KEY, "side");
@@ -38,7 +38,7 @@ const BeforeRouter: FC<ReactNode> = ({ children }) => {
 
     dispatch(setLayout(layout));
   }, [layout]);
-  const themeCache = (localStorage.getItem(THEME_KEY) || "theme") as ThemeType;
+  const themeCache = (localStorage.getItem(THEME_KEY) || "light") as ThemeType;
   useEffect(() => {
     if (!themeCache) {
       localStorage.setItem(THEME_KEY, "light");

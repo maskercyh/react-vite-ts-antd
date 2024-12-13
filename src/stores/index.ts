@@ -57,7 +57,9 @@ export const useCommonStore = () => {
     // 路由
     const routeList = useSelector((state: RootState) => state.user.routeList);
 
+    const activeKey = useSelector((state: RootState) => state.tabs.activeKey);
     return {
+        activeKey,
         configSetting,
         routeList,
         token,

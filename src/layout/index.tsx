@@ -8,10 +8,11 @@ import { debounce } from "lodash";
 import SettingDrawer from "./components/SettingDrawer";
 import SideMenu from "./components/SideMenu";
 import Header from "./components/Header";
+import TabsTop from "./components/TabsTop";
 import { KeepAlive } from "react-activation";
 import styles from "./index.module.less";
 import { AnimatePresence, motion } from "framer-motion";
-
+import { Watermark } from "antd";
 function Layout() {
   const {
     menuList,
@@ -57,34 +58,42 @@ function Layout() {
           ${styles["app-container-wrap"]}
         `}
       >
-        {configSetting.layout == "side" && <SideMenu />}
+        {configSetting.layout === "side" && <SideMenu />}
         <section
           className={`
             ${styles["app-main-wrap"]} 
-            ${configSetting.layout == "side" && styles["app-main-side-menu"]}
+            ${configSetting.layout === "side" && styles["app-main-side-menu"]}
             ${isCollapsed ? styles["is-collapse-main"] : ""}
           `}
         >
           <Header />
-          <main
-            className={`
+          <TabsTop />
+          <Watermark
+            className="h-full flex flex-col flex-1"
+            content={
+              !configSetting.watermark ? "" : configSetting.title ?? "no title"
+            }
+          >
+            <main
+              className={`
               ${styles["app-main"]}
             `}
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={uri}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <KeepAlive id={uri} name={uri}>
-                  <Outlet />
-                </KeepAlive>
-              </motion.div>
-            </AnimatePresence>
-          </main>
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={uri}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <KeepAlive id={uri} name={uri}>
+                    <Outlet />
+                  </KeepAlive>
+                </motion.div>
+              </AnimatePresence>
+            </main>
+          </Watermark>
         </section>
       </section>
       {configSetting.drawerSetting && <SettingDrawer />}

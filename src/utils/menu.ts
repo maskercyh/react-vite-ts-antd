@@ -34,6 +34,7 @@ export function toRoute(menu: MenuType[]): RouteObject[] {
       const obj = {
         path: item.path,
         key: item.key,
+        label: item.label,
         element: LazyLoad(item.element),
       }
       resRoute.push(obj)

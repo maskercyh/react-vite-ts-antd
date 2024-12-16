@@ -89,6 +89,7 @@ export default function TabsTop() {
   };
   const onChange = (key: string) => {
     const tab = tabs.find((tab) => tab.key == key) as TabsData;
+    dispatch(setActiveKey(key));
     navigate(tab.path);
   };
 

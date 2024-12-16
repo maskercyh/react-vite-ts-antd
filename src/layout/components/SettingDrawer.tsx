@@ -5,13 +5,13 @@ import styles from "../index.module.less";
 import { useDispatch } from "react-redux";
 import Theme from "@/components/Theme";
 import { setLayout, setColorPrimary, LAYOUT_KEY } from "@/stores/public";
-import type { Layout } from "#/public";
+import type { LayoutType } from "#/public";
 import type { AppDispatch } from "@/stores";
 const SettingDrawer: React.FC = () => {
   const { configSetting } = useCommonStore();
   const dispatch: AppDispatch = useDispatch();
 
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const show = () => {
     setOpen(true);
   };
@@ -19,7 +19,7 @@ const SettingDrawer: React.FC = () => {
   const themeColorSet = (params: any) => () => {
     dispatch(setColorPrimary(params));
   };
-  const layoutSet = (params: Layout) => () => {
+  const layoutSet = (params: LayoutType) => () => {
     localStorage.setItem(LAYOUT_KEY, params);
     dispatch(setLayout(params));
   };

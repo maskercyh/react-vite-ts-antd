@@ -54,29 +54,29 @@ app.post('/api/user/info', (req, res) => {
                 },
                 {
                     "label": "组件",
-                    "key": "components",
+                    "key": "components3",
                     "icon": "SlackSquareOutlined",
-                    "path": "/components",
+                    "path": "/components3",
                     "children": [
                         {
                             "label": "基础",
                             "key": "basic",
                             "icon": "SlackSquareOutlined",
                             // "type": "group",
-                            "path": '/components/basic',
+                            "path": '/components3/basic',
                             "children": [
                                 {
                                     "label": "按钮",
                                     "key": "button",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components/basic/button",
+                                    "path": "/components3/basic/button",
                                     "element": "components/basic/button",
                                 },
                                 {
                                     "label": "chart",
                                     "key": "chart",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components/basic/chart",
+                                    "path": "/components3/basic/chart",
                                     "element": "components/basic/chart",
                                 }
                             ]
@@ -85,7 +85,7 @@ app.post('/api/user/info', (req, res) => {
                 },
                 {
                     "label": "组件",
-                    "key": "components1",
+                    "key": "components2",
                     "icon": "SlackSquareOutlined",
                     "path": "/components2",
                     "children": [

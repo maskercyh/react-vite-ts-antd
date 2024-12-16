@@ -10,6 +10,7 @@ import type { ThemeType, LayoutType } from "#/public";
 import { STORAGE_AUTHORIZE_KEY } from "@/stores/public";
 import { getLocalInfo } from "@/utils/local";
 import type { AppDispatch } from "@/stores";
+import { debounce } from "lodash";
 import { useDispatch } from "react-redux";
 import { getUserInfo } from "@/api/user";
 import Loading from "~@/components/Loading";
@@ -67,6 +68,20 @@ const BeforeRouter: FC<ReactNode> = ({ children }) => {
     };
     fetchData();
   }, [token, dispatch]);
+
+  const handleIsPhone = debounce(() => {
+    const isPhone = window.innerWidth <= 768;
+    dispatch(toggleCollapsed(isPhone));
+    dispatch(togglePhone(isPhone));
+  }, 500);
+
+  useEffect(() => {
+    handleIsPhone();
+    window.addEventListener("resize", handleIsPhone);
+    return () => {
+      window.removeEventListener("resize", handleIsPhone);
+    };
+  }, []);
 
   if (!token && pathname !== "/login") {
     return navigate("/login");

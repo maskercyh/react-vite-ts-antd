@@ -14,6 +14,7 @@ export interface LayoutSetting {
   theme: 'light' | 'dark'
   colorPrimary: string
   locale?: string
+  compact: boolean
 }
 
 

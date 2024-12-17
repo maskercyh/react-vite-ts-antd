@@ -1,3 +1,3 @@
 export default function button() {
-  return <button>按钮</button>;
+  return <Button>按钮</Button>;
 }

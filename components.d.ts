@@ -8,6 +8,8 @@ declare global{
 	const Theme: typeof import('./src/components/Theme/index')['default']
 	const UserAvater: typeof import('./src/components/UserAvater/index')['default']
 	const Header: typeof import('./src/layout/components/Header')['default']
+	const Logo: typeof import('./src/layout/components/Logo')['default']
+	const TabsTop: typeof import('./src/layout/components/TabsTop')['default']
 	const Dashboard: typeof import('./src/view/dashboard/index')['default']
 	const button: typeof import('./src/view/components/basic/button')['default']
 	const chart: typeof import('./src/view/components/basic/chart')['default']

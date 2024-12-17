@@ -100,14 +100,14 @@ app.post('/api/user/info', (req, res) => {
                                     "label": "按钮",
                                     "key": "button1",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components2/basic/button1",
+                                    "path": "/components2/basic1/button1",
                                     "element": "components/basic/button",
                                 },
                                 {
                                     "label": "chart",
                                     "key": "chart1",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components2/basic/chart1",
+                                    "path": "/components2/basic1/chart1",
                                     "element": "components/basic/chart",
                                 }
                             ]

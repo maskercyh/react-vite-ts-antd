@@ -33,6 +33,7 @@ const menuSlice = createSlice({
       state.selectedKeys = action.payload;
     },
     setOpenKeys: (state, action: PayloadAction<string[]>) => {
+      console.log(action, 123123)
       state.openKeys = action.payload;
     },
 

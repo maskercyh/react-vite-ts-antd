@@ -7,4 +7,5 @@ export default {
     title: 'RTVA',
     colorPrimary: '#1677FF',
     watermark: false,
+    compact: false
 } as LayoutSetting

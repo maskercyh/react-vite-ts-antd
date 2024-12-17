@@ -19,25 +19,26 @@ const App: React.FC = () => {
     const current = routeList.findIndex((item) => item.path === pathname);
     if (current == -1) return;
     const { key, path } = routeList[current];
-    if (!isPhone) setopenKeys(findParentMenuKey(menuList, path));
+    if (configSetting.layout === "side")
+      setopenKeys(findParentMenuKey(menuList, path));
     setSelectKey(key);
-  }, []);
+  }, [pathname]);
 
   const navigate = useNavigate();
   const onClick: MenuProps["onClick"] = (e) => {
-    if (!isPhone) setopenKeys(e.keyPath);
+    setopenKeys(e.keyPath);
     setSelectKey(e.key);
     const current = routeList.findIndex((item) => item.key === e.key);
     if (current === -1) return;
-    const { path, key, label } = routeList[current];
-    dispatch(addTabs({ key, path, label }));
-    dispatch(setActiveKey(key));
+    const { path, label } = routeList[current];
+    dispatch(addTabs({ key: path, label }));
+    dispatch(setActiveKey(path));
     navigate(path);
   };
+
   const onOpenChange: MenuProps["onOpenChange"] = (newOpenKeys) => {
     if (!isPhone) setopenKeys(newOpenKeys);
   };
-  console.log(openKeys);
   return (
     <Menu
       className={`
@@ -60,7 +61,7 @@ const App: React.FC = () => {
         !isPhone && {
           inlineCollapsed: isCollapsed,
         })}
-      {...(configSetting.layout !== "side" && { openKeys: openKeys })}
+      {...(configSetting.layout === "side" && { openKeys: openKeys })}
     />
   );
 };

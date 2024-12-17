@@ -52,7 +52,7 @@
       height: 100%;
       overflow: hidden;
       z-index: var(--el-zindex-top);
-      border-right: 1px solid rgba(5, 5, 5, 0.06);
+      border-right: none;
       .logo-space {
         padding: var(--el-padding);
       }
@@ -116,7 +116,7 @@
           padding-left: var(--el-padding);
           padding-right: var(--el-padding);
           background: var(--bg-color);
-          box-shadow: 0 1px 4px #00152914;
+          box-shadow: var(--box-shadow);
           align-items: center;
           display: flex;
           > div {
@@ -149,14 +149,18 @@
         }
       }
       .tab-top-container {
+        position: relative;
         display: flex;
         align-content: center;
         align-items: center;
         justify-content: space-between;
         min-height: var(--el-tabs-height);
-        padding: 0 var(--el-padding);
-        background: var(--bg-color);
+
         padding-top: calc(var(--el-padding) / 2);
+
+        .tab-top-nav-list {
+          width: 100%;
+        }
       }
       .app-main {
         padding: var(--el-padding);

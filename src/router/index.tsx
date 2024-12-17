@@ -5,21 +5,22 @@ import { AliveScope } from "react-activation";
 import Loading from "~@/components/Loading";
 import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
-import { CSSTransition } from "react-transition-group";
 import GenRoute from "./GenRoute";
 import zhCN from "antd/es/locale/zh_CN";
 import enUS from "antd/es/locale/en_US";
-const { defaultAlgorithm, darkAlgorithm } = theme;
+const { defaultAlgorithm, darkAlgorithm, compactAlgorithm } = theme;
 
 function AppConent() {
   const { theme, configSetting } = useCommonStore();
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
+  const algorithm = [theme === "dark" ? darkAlgorithm : defaultAlgorithm];
+  if (configSetting.compact) algorithm.push(compactAlgorithm);
   return (
     <ConfigProvider
       locale={currentLanguage === "en" ? enUS : zhCN}
       theme={{
-        algorithm: [theme === "dark" ? darkAlgorithm : defaultAlgorithm],
+        algorithm: algorithm,
         token: {
           colorPrimary: configSetting.colorPrimary,
         },

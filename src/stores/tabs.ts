@@ -53,11 +53,9 @@ const tabsSlice = createSlice({
     addTabs: (state, action) => {
       const { tabs } = state;
       const { payload } = action;
-
       // 判断是否存在相同的路由，不存在则累加
       const has = tabs.find(item => item.key === payload.key);
       if (!has) tabs.push(payload);
-
       // 如果只剩一个则无法关闭
       if (tabs?.length) tabs[0].closable = tabs?.length > 1;
     },

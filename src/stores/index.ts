@@ -23,6 +23,7 @@ export const store = configureStore({
  * 获取常用的状态数据
  */
 export const useCommonStore = () => {
+    const isLock = useSelector((state: RootState) => state.tabs.isLock)
     const configSetting = useSelector((state: RootState) => state.public)
     //token
     const token = useSelector((state: RootState) => state.user.token);
@@ -60,6 +61,7 @@ export const useCommonStore = () => {
     const activeKey = useSelector((state: RootState) => state.tabs.activeKey);
     return {
         activeKey,
+        isLock,
         configSetting,
         routeList,
         token,

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import type { AppDispatch } from "@/stores";
 function App() {
   const { RangePicker } = DatePicker;
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [count, setCount] = useState(0);
@@ -20,6 +21,7 @@ function App() {
   }
   return (
     <>
+      <h1>Current Path: {pathname}</h1>
       <RangePicker />
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -31,16 +33,16 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button className="mt-25px margin-auto" onClick={handelLogout}>
+        <Button className="mt-25px margin-auto" onClick={handelLogout}>
           退出登录
-        </button>
-        <button className="mt-25px margin-auto" onClick={toDdashboard}>
+        </Button>
+        <Button className="mt-25px margin-auto" onClick={toDdashboard}>
           toDdashboard
-        </button>
+        </Button>
 
-        <button onClick={() => setCount((count) => count + 1)}>
+        <Button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>

@@ -53,7 +53,7 @@ declare global {
   const setNav: typeof import('../src/stores/tabs')['setNav']
   const setOpenKeys: typeof import('../src/stores/menu')['setOpenKeys']
   const setPermissions: typeof import('../src/stores/user')['setPermissions']
-  const setRefresh: typeof import('../src/stores/public')['setRefresh']
+  const setRefresh: typeof import('../src/stores/tabs')['setRefresh']
   const setRefreshPage: typeof import('../src/stores/public')['setRefreshPage']
   const setRouteList: typeof import('../src/stores/user')['setRouteList']
   const setSelectedKeys: typeof import('../src/stores/menu')['setSelectedKeys']

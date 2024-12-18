@@ -8,6 +8,7 @@ import { setActiveKey, addTabs } from "@/stores/tabs";
 
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const { menuList, routeList, isCollapsed, configSetting, isPhone } =
     useCommonStore();
   const { pathname } = useLocation();
@@ -24,7 +25,6 @@ const App: React.FC = () => {
     setSelectKey(key);
   }, [pathname]);
 
-  const navigate = useNavigate();
   const onClick: MenuProps["onClick"] = (e) => {
     setopenKeys(e.keyPath);
     setSelectKey(e.key);

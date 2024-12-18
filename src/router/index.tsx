@@ -1,21 +1,33 @@
 import { HashRouter, BrowserRouter } from "react-router-dom";
-import { App, ConfigProvider } from "antd";
+import { App, ConfigProvider, message } from "antd";
 import LayoutSetting from "@/config/default-setting";
 import { AliveScope } from "react-activation";
 import Loading from "~@/components/Loading";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import GenRoute from "./GenRoute";
 import zhCN from "antd/es/locale/zh_CN";
 import enUS from "antd/es/locale/en_US";
+import { useCommonStore } from "@/stores";
+
 const { defaultAlgorithm, darkAlgorithm, compactAlgorithm } = theme;
 
-function AppConent() {
+function AppContent() {
   const { theme, configSetting } = useCommonStore();
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
+
   const algorithm = [theme === "dark" ? darkAlgorithm : defaultAlgorithm];
   if (configSetting.compact) algorithm.push(compactAlgorithm);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [theme]);
+
   return (
     <ConfigProvider
       locale={currentLanguage === "en" ? enUS : zhCN}
@@ -37,15 +49,15 @@ function AppConent() {
   );
 }
 
-// 导出组件，基于路由设置选择 HashRouter 或 BrowserRouter
+// Main component for handling routing (HashRouter or BrowserRouter)
 export default () => {
   return LayoutSetting.routeType === "hash" ? (
     <HashRouter>
-      <AppConent />
+      <AppContent />
     </HashRouter>
   ) : (
     <BrowserRouter>
-      <AppConent />
+      <AppContent />
     </BrowserRouter>
   );
 };

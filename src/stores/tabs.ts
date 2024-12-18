@@ -17,12 +17,17 @@ const tabsSlice = createSlice({
   name: 'tabs',
   initialState: {
     isLock: false,
+    isRefresh: false,
     isMaximize: false,
     activeKey: '',
     nav: [] as NavData[],
     tabs: [] as TabsData[]
   },
   reducers: {
+
+    setRefresh: (state, action) => {
+      state.isRefresh = action.payload;
+    },
     /** 设置锁 */
     toggleLock: (state, action) => {
       state.isLock = !!action.payload;
@@ -152,6 +157,7 @@ const tabsSlice = createSlice({
 });
 
 export const {
+  setRefresh,
   toggleLock,
   toggleMaximize,
   setActiveKey,

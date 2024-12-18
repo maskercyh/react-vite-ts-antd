@@ -28,7 +28,7 @@ dayjs.locale("zh-cn");
 const resetVhAndPx = debounce(() => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty("--vh", `${vh}px`);
-}, 500);
+}, 300);
 resetVhAndPx();
 window.addEventListener("resize", resetVhAndPx);
 

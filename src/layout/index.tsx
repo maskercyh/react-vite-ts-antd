@@ -11,8 +11,9 @@ import TabsTop from "./components/TabsTop";
 import { KeepAlive } from "react-activation";
 import styles from "./index.module.less";
 import { AnimatePresence, motion } from "framer-motion";
-import { Watermark } from "antd";
-function Layout() {
+import { Watermark, message } from "antd";
+
+const Layout: React.FC = () => {
   const {
     menuList,
     isMaximize,
@@ -23,8 +24,7 @@ function Layout() {
   } = useCommonStore();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
-  const { pathname, search } = useLocation();
-  const uri = pathname + search;
+  const { pathname } = useLocation();
   const [messageApi, contextHolder] = message.useMessage();
 
   // 监测是否需要刷新
@@ -35,47 +35,43 @@ function Layout() {
     // versionCheck(messageApi);
   }, [pathname]);
 
+  // Use message API to display notifications
+  useEffect(() => {
+    if (pathname === "/somePath") {
+      messageApi.success("Welcome to the new page!");
+    }
+  }, [pathname, messageApi]);
+
   return (
     <div className={`${styles["app-layout"]}`}>
-      <section
-        className={`
-          ${styles["app-container-wrap"]}
-        `}
-      >
+      <section className={`${styles["app-container-wrap"]}`}>
         {configSetting.layout === "side" && !isPhone && <SideMenu />}
         <section
-          className={`
-            ${styles["app-main-wrap"]} 
-            ${
-              configSetting.layout === "side" &&
-              !isPhone &&
-              styles["app-main-side-menu"]
-            }
-            ${isCollapsed && !isPhone ? styles["is-collapse-main"] : ""}
-          `}
+          className={`${styles["app-main-wrap"]} ${
+            configSetting.layout === "side" &&
+            !isPhone &&
+            styles["app-main-side-menu"]
+          } ${isCollapsed && !isPhone ? styles["is-collapse-main"] : ""}`}
         >
           <Header />
           <TabsTop />
           <Watermark
             className="h-full flex flex-col flex-1"
             content={
-              !configSetting.watermark ? "" : configSetting.title ?? "no title"
+              configSetting.watermark ? configSetting.title ?? "no title" : ""
             }
           >
-            <main
-              className={`
-              ${styles["app-main"]}
-            `}
-            >
+            <main className={`${styles["app-main"]}`}>
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={uri}
+                  key={pathname}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <KeepAlive id={uri} name={uri}>
+                  <div>{pathname}</div>
+                  <KeepAlive id={pathname} name={pathname}>
                     <Outlet />
                   </KeepAlive>
                 </motion.div>
@@ -87,6 +83,6 @@ function Layout() {
       {configSetting.drawerSetting && <SettingDrawer />}
     </div>
   );
-}
+};
 
 export default Layout;

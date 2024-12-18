@@ -7,7 +7,13 @@ import Line from "./components/Line";
 import Block from "./components/Block";
 
 function Dashboard() {
-  return <div>dashboard</div>;
+  const { pathname } = useLocation();
+  return (
+    <div>
+      <h1>Current Path: {pathname}</h1>
+      dashboard
+    </div>
+  );
 }
 
 export default Dashboard;

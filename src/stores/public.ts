@@ -30,22 +30,22 @@ export const publicSlice = createSlice({
     setFullscreen: (state, action) => {
       state.isFullscreen = action.payload;
     },
-    /** 设置重新加载 */
-    setRefresh: (state, action) => {
-      state.isRefresh = action.payload;
-    },
-    /** 设置重新加载页面 */
-    setRefreshPage: (state, action) => {
-      state.isRefreshPage = action.payload;
-    }
+    // /** 设置重新加载 */
+    // setRefresh: (state, action) => {
+    //   state.isRefresh = action.payload;
+    // },
+    // /** 设置重新加载页面 */
+    // setRefreshPage: (state, action) => {
+    //   state.isRefreshPage = action.payload;
+    // }
   }
 });
 
 export const {
   setThemeValue,
   setFullscreen,
-  setRefresh,
-  setRefreshPage,
+  // setRefresh,
+  // setRefreshPage,
   setLayout,
   setColorPrimary
 } = publicSlice.actions;

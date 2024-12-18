@@ -13,14 +13,12 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import type { TabsProps } from "antd";
-import type { TabsProps } from "antd";
 import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import styles from "../index.module.less";
 import { useDispatch, useSelector } from "react-redux";
 import { useCommonStore } from "@/stores";
 import type { TabsData } from "@/stores/tabs";
-import { ReloadOutlined } from "@ant-design/icons";
 import { ReloadOutlined } from "@ant-design/icons";
 import {
   setActiveKey,
@@ -30,7 +28,6 @@ import {
   toggleLock,
   setRefresh,
 } from "@/stores/tabs";
-import { Dropdown } from "antd";
 import { Dropdown } from "antd";
 import type { AppDispatch, RootState } from "@/stores";
 import { useAliveController } from "react-activation";

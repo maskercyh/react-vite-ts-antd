@@ -79,7 +79,7 @@ const Login: React.FC = () => {
   useEffect(() => {
     // 如果存在token，则直接进入页面
     if (token) {
-      navigate("/index");
+      navigate("/");
     }
   }, []);
 
@@ -91,7 +91,7 @@ const Login: React.FC = () => {
       const { code, data } = await login(values);
       if (Number(code) !== 200) return;
       dispatch(setToken(data.token));
-      navigate("/index");
+      navigate("/");
     } finally {
       setLoading(false);
     }

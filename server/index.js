@@ -38,7 +38,7 @@ app.post('/api/user/info', (req, res) => {
         data: {
             menuList: [
                 {
-                    "path": "",
+                    "path": "/",
                     "label": "首页",
                     "key": "index",
                     "icon": "SlackSquareOutlined",

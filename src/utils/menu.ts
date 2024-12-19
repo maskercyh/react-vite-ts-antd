@@ -27,32 +27,24 @@ export function flattenTreeByMenu(menu: MenuType[]): RouteType[] {
  * @param menu 菜单列表（树）
  * @returns 动态路由
  */
-export function toRoute(menu: MenuType[], parentPath: string = '/'): RouteObject[] {
-  let resRoute: RouteObject[] = []
-  menu.forEach((item) => {
-    // const obj = {
-    //   path: item.path,
-    //   key: item.key,
-    //   label: item.label,
-    //   element: LazyLoad(item.element),
-    //   children: item.children ? toRoute(item.children) : []
-    // }
-    // resRoute.push(obj)
-    const path = parentPath === "/" ? '/' + item.path : parentPath + '/' + item.path
-
+export function toRoute(menu: MenuType[], parentPath: string = ''): RouteObject[] {
+  return menu.reduce<RouteObject[]>((resRoute, item) => {
+    const path = parentPath === "/" ? item.path : `${parentPath}/${item.path.replace(/^\/+/, '')}`;
     if (!item.children) {
       const obj = {
-        path: path,
+        path,
         key: item.key,
         label: item.label,
         element: LazyLoad(item.element),
-      }
-      resRoute.push(obj)
+      };
+      resRoute.push(obj);
     } else {
-      resRoute = resRoute.concat(toRoute(item.children, path))
+      const childRoutes = toRoute(item.children, path);
+      resRoute.push(...childRoutes);
     }
-  })
-  return resRoute
+
+    return resRoute;
+  }, []);
 }
 
 
@@ -60,24 +52,23 @@ export function toRoute(menu: MenuType[], parentPath: string = '/'): RouteObject
  * 生成icon menu
  * @param menu 菜单列表
  */
-export function toMenu(menu: MenuType[]): MenuItem[] {
-  const temp: MenuItem[] = []
-  menu.forEach((item) => {
-    const { key, label, icon, path } = item
+export function toMenu(menu: MenuType[], parentPath: string = ''): MenuItem[] {
+  return menu.map((item) => {
+    const { key, label, icon } = item;
+    const path = `${parentPath.replace(/\/$/, '')}/${item.path.replace(/^\/+/, '')}`;
     const newItem: MenuItem = {
       label,
       key,
       path,
-      icon: icon ? React.createElement(iconList[item.icon]) : ''
-    }
+      icon: icon && iconList[item.icon] ? React.createElement(iconList[item.icon]) : null,
+    };
     if (item.children) {
-      newItem.children = toMenu(item.children)
+      newItem.children = toMenu(item.children, path);
     }
-    temp.push(newItem)
-  })
-
-  return temp
+    return newItem;
+  });
 }
+
 
 export function findParentMenuKey(menu: MenuType[], path: string): string[] {
   const result: string[] = []

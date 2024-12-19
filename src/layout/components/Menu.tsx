@@ -18,7 +18,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const current = routeList.findIndex((item) => item.path === pathname);
-    console.log(routeList);
     if (current == -1) return;
     const { key, path } = routeList[current];
     if (configSetting.layout === "side")
@@ -27,16 +26,12 @@ const App: React.FC = () => {
   }, [pathname]);
 
   const onClick: MenuProps["onClick"] = (e) => {
-    setopenKeys(e.keyPath);
-    setSelectKey(e.key);
-    console.log(e.key, e.keyPath);
     const current = routeList.findIndex((item) => item.key === e.key);
     if (current === -1) return;
     const { path, label } = routeList[current];
     dispatch(addTabs({ key: path, label }));
     dispatch(setActiveKey(path));
     navigate(path);
-    console.log(path);
   };
 
   const onOpenChange: MenuProps["onOpenChange"] = (newOpenKeys) => {

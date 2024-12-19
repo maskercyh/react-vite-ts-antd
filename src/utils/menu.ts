@@ -27,7 +27,7 @@ export function flattenTreeByMenu(menu: MenuType[]): RouteType[] {
  * @param menu 菜单列表（树）
  * @returns 动态路由
  */
-export function toRoute(menu: MenuType[], parentPath: string = ''): RouteObject[] {
+export function toRoute(menu: MenuType[], parentPath: string = '/'): RouteObject[] {
   let resRoute: RouteObject[] = []
   menu.forEach((item) => {
     // const obj = {
@@ -38,8 +38,9 @@ export function toRoute(menu: MenuType[], parentPath: string = ''): RouteObject[
     //   children: item.children ? toRoute(item.children) : []
     // }
     // resRoute.push(obj)
+    const path = parentPath === "/" ? '/' + item.path : parentPath + '/' + item.path
+
     if (!item.children) {
-      const path = parentPath ? parentPath + '/' + item.path : item.path
       const obj = {
         path: path,
         key: item.key,
@@ -48,7 +49,6 @@ export function toRoute(menu: MenuType[], parentPath: string = ''): RouteObject[
       }
       resRoute.push(obj)
     } else {
-      const path = parentPath ? parentPath + '/' + item.path : item.path
       resRoute = resRoute.concat(toRoute(item.children, path))
     }
   })

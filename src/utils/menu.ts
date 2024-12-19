@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import LazyLoad from '@/utils/LazyLoad'
 import type { RouteObject } from 'react-router-dom'
 import * as Icons from '@ant-design/icons'
@@ -27,17 +27,30 @@ export function flattenTreeByMenu(menu: MenuType[]): RouteType[] {
  * @param menu 菜单列表（树）
  * @returns 动态路由
  */
-export function toRoute(menu: MenuType[]): RouteObject[] {
+export function toRoute(menu: MenuType[], parentPath: string = ''): RouteObject[] {
   let resRoute: RouteObject[] = []
   menu.forEach((item) => {
-    const obj = {
-      path: item.path,
-      key: item.key,
-      label: item.label,
-      element: LazyLoad(item.element),
-      children: item.children ? toRoute(item.children) : []
+    // const obj = {
+    //   path: item.path,
+    //   key: item.key,
+    //   label: item.label,
+    //   element: LazyLoad(item.element),
+    //   children: item.children ? toRoute(item.children) : []
+    // }
+    // resRoute.push(obj)
+    if (!item.children) {
+      const path = parentPath ? parentPath + '/' + item.path : item.path
+      const obj = {
+        path: path,
+        key: item.key,
+        label: item.label,
+        element: LazyLoad(item.element),
+      }
+      resRoute.push(obj)
+    } else {
+      const path = parentPath ? parentPath + '/' + item.path : item.path
+      resRoute = resRoute.concat(toRoute(item.children, path))
     }
-    resRoute.push(obj)
   })
   return resRoute
 }

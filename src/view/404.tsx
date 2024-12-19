@@ -10,7 +10,7 @@ function NotFound() {
 
   /** 跳转首页 */
   const goIndex = () => {
-    navigate("/index");
+    navigate("/");
   };
   async function handelLogout() {
     await dispatch(logout());

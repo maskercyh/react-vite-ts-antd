@@ -5,7 +5,7 @@ export interface MenuType {
     key: string,
     path: string
     hidden: boolean
-
+    index: boolean,
     icon: string
     element: string
     children?: MenuType[]

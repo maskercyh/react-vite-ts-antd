@@ -38,7 +38,7 @@ app.post('/api/user/info', (req, res) => {
         data: {
             menuList: [
                 {
-                    "path": "/",
+                    "path": "",
                     "label": "首页",
                     "key": "index",
                     "icon": "SlackSquareOutlined",
@@ -48,14 +48,14 @@ app.post('/api/user/info', (req, res) => {
                     "label": "仪表盘",
                     "key": "dashboard",
                     "icon": "SlackSquareOutlined",
-                    "path": "/dashboard",
+                    "path": "dashboard",
                     "element": "dashboard/index",
                 },
                 {
                     "label": "组件",
                     "key": "components3",
                     "icon": "SlackSquareOutlined",
-                    "path": "/components3",
+                    "path": "components3",
                     "children": [
                         {
                             "label": "基础",
@@ -85,7 +85,7 @@ app.post('/api/user/info', (req, res) => {
                     "label": "组件",
                     "key": "components2",
                     "icon": "SlackSquareOutlined",
-                    "path": "/components2",
+                    "path": "components2",
                     "children": [
                         {
                             "label": "基础",

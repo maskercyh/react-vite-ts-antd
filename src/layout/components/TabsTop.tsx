@@ -139,11 +139,10 @@ export default function TabsTop() {
 
   // 处理刷新操作
   const onClickRefresh = () => {
-    if (loading) return; // 防止重复点击
+    if (loading) return;
     setLoading(true);
     dispatch(setRefresh(true));
 
-    // 模拟刷新
     setTime(
       setTimeout(() => {
         refresh(activeKey);
@@ -152,6 +151,16 @@ export default function TabsTop() {
       }, 200)
     );
   };
+  useEffect(() => {
+    return () => {
+      if (time) {
+        clearTimeout(time);
+      }
+      if (refreshTime) {
+        clearTimeout(refreshTime);
+      }
+    };
+  }, [time, refreshTime]);
 
   // 下拉菜单项
   const items = [

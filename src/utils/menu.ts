@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Children } from 'react'
 import LazyLoad from '@/utils/LazyLoad'
 import type { RouteObject } from 'react-router-dom'
 import * as Icons from '@ant-design/icons'
@@ -30,17 +30,14 @@ export function flattenTreeByMenu(menu: MenuType[]): RouteType[] {
 export function toRoute(menu: MenuType[]): RouteObject[] {
   let resRoute: RouteObject[] = []
   menu.forEach((item) => {
-    if (!item.children) {
-      const obj = {
-        path: item.path,
-        key: item.key,
-        label: item.label,
-        element: LazyLoad(item.element),
-      }
-      resRoute.push(obj)
-    } else {
-      resRoute = resRoute.concat(toRoute(item.children))
+    const obj = {
+      path: item.path,
+      key: item.key,
+      label: item.label,
+      element: LazyLoad(item.element),
+      children: item.children ? toRoute(item.children) : []
     }
+    resRoute.push(obj)
   })
   return resRoute
 }

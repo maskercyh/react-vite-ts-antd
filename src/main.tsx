@@ -33,14 +33,14 @@ resetVhAndPx();
 window.addEventListener("resize", resetVhAndPx);
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <StyleProvider
-      hashPriority="high"
-      transformers={[legacyLogicalPropertiesTransformer]}
-    >
-      <Provider store={store}>
-        <Router />
-      </Provider>
-    </StyleProvider>
-  </StrictMode>
+  // <StrictMode>
+  <StyleProvider
+    hashPriority="high"
+    transformers={[legacyLogicalPropertiesTransformer]}
+  >
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  </StyleProvider>
+  // </StrictMode>
 );

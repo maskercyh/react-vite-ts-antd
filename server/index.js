@@ -38,12 +38,11 @@ app.post('/api/user/info', (req, res) => {
         data: {
             menuList: [
                 {
+                    "path": "/",
                     "label": "首页",
                     "key": "index",
                     "icon": "SlackSquareOutlined",
-                    "path": "/index",
                     "element": "index/index",
-
                 },
                 {
                     "label": "仪表盘",
@@ -62,21 +61,20 @@ app.post('/api/user/info', (req, res) => {
                             "label": "基础",
                             "key": "basic",
                             "icon": "SlackSquareOutlined",
-                            // "type": "group",
-                            "path": '/components3/basic',
+                            "path": 'basic',
                             "children": [
                                 {
                                     "label": "按钮",
                                     "key": "button",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components3/basic/button",
+                                    "path": "button",
                                     "element": "components/basic/button",
                                 },
                                 {
                                     "label": "chart",
                                     "key": "chart",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components3/basic/chart",
+                                    "path": "chart",
                                     "element": "components/basic/chart",
                                 }
                             ]
@@ -94,20 +92,20 @@ app.post('/api/user/info', (req, res) => {
                             "key": "basic1",
                             "icon": "SlackSquareOutlined",
                             // "type": "group",
-                            "path": '/components2/basic1',
+                            "path": 'basic1',
                             "children": [
                                 {
                                     "label": "按钮",
                                     "key": "button1",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components2/basic1/button1",
+                                    "path": "button1",
                                     "element": "components/basic/button",
                                 },
                                 {
                                     "label": "chart",
                                     "key": "chart1",
                                     "icon": "SlackSquareOutlined",
-                                    "path": "/components2/basic1/chart1",
+                                    "path": "chart1",
                                     "element": "components/basic/chart",
                                 }
                             ]

@@ -1,11 +1,8 @@
 import { HashRouter, BrowserRouter } from "react-router-dom";
 import { App, ConfigProvider, message } from "antd";
 import LayoutSetting from "@/config/default-setting";
-import { AliveScope } from "react-activation";
-import Loading from "~@/components/Loading";
-import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import GenRoute from "./GenRoute";
+import GenerRoute from "./GenerRoute";
 import zhCN from "antd/es/locale/zh_CN";
 import enUS from "antd/es/locale/en_US";
 import { useCommonStore } from "@/stores";
@@ -39,11 +36,7 @@ function AppContent() {
       }}
     >
       <App>
-        <AliveScope>
-          <Suspense fallback={<Loading />}>
-            <GenRoute />
-          </Suspense>
-        </AliveScope>
+        <GenerRoute />
       </App>
     </ConfigProvider>
   );

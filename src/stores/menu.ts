@@ -5,7 +5,8 @@ interface MenuState {
   isCollapsed: boolean;
   selectedKeys: string;
   openKeys: string[];
-  menuList: MenuType[]; // 假设 `SideMenu` 类型定义
+  menuList: MenuType[];
+  spiltMenu: MenuType[];
 }
 
 const initialState: MenuState = {
@@ -14,6 +15,7 @@ const initialState: MenuState = {
   selectedKeys: 'dashboard',
   openKeys: ['Dashboard'],
   menuList: [],
+  spiltMenu: []
 };
 
 const menuSlice = createSlice({
@@ -22,6 +24,9 @@ const menuSlice = createSlice({
   reducers: {
     setMenuList: (state, action) => {
       state.menuList = action.payload;
+    },
+    setSpiltMenu: (state, action) => {
+      state.spiltMenu = action.payload;
     },
     toggleCollapsed: (state, action: PayloadAction<boolean>) => {
       state.isCollapsed = action.payload;
@@ -33,13 +38,12 @@ const menuSlice = createSlice({
       state.selectedKeys = action.payload;
     },
     setOpenKeys: (state, action: PayloadAction<string[]>) => {
-      console.log(action, 123123)
       state.openKeys = action.payload;
     },
 
   },
 });
 
-export const { toggleCollapsed, togglePhone, setSelectedKeys, setOpenKeys, setMenuList } = menuSlice.actions;
+export const { toggleCollapsed, togglePhone, setSelectedKeys, setOpenKeys, setMenuList, setSpiltMenu } = menuSlice.actions;
 
 export default menuSlice.reducer;

@@ -5,14 +5,14 @@ import { useLocation } from "react-router-dom";
 import { useCommonStore } from "@/stores";
 import type { AppDispatch } from "@/stores";
 import SettingDrawer from "./components/SettingDrawer";
-import SideMenu from "./components/SideMenu";
+import SideMenu from "./components/menu/SideMenu";
 import Header from "./components/Header";
 import TabsTop from "./components/TabsTop";
 import { KeepAlive } from "react-activation";
 import styles from "./index.module.less";
 import { AnimatePresence, motion } from "framer-motion";
 import { Watermark, message } from "antd";
-
+import classNames from "classnames";
 const Layout: React.FC = () => {
   const {
     menuList,
@@ -21,6 +21,7 @@ const Layout: React.FC = () => {
     isPhone,
     isRefresh,
     configSetting,
+    spiltMenu,
   } = useCommonStore();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
@@ -34,7 +35,6 @@ const Layout: React.FC = () => {
     }
     // versionCheck(messageApi);
   }, [pathname]);
-
   // Use message API to display notifications
   useEffect(() => {
     if (pathname === "/somePath") {
@@ -43,25 +43,29 @@ const Layout: React.FC = () => {
   }, [pathname, messageApi]);
 
   return (
-    <div className={`${styles["app-layout"]}`}>
-      <section className={`${styles["app-container-wrap"]}`}>
-        {configSetting.layout === "side" && !isPhone && <SideMenu />}
+    <div className={classNames(styles["app-layout"])}>
+      <section className={classNames(styles["app-container-wrap"])}>
+        {(configSetting.layout === "side" ||
+          (configSetting.layout === "mix" && spiltMenu.length)) &&
+          !isPhone && <SideMenu />}
+
         <section
-          className={`${styles["app-main-wrap"]} ${
-            configSetting.layout === "side" &&
-            !isPhone &&
-            styles["app-main-side-menu"]
-          } ${isCollapsed && !isPhone ? styles["is-collapse-main"] : ""}`}
+          className={classNames(styles["app-main-wrap"], {
+            [styles["app-main-side-menu"]]:
+              configSetting.layout === "side" && !isPhone,
+            [styles["is-collapse-main"]]: isCollapsed && !isPhone,
+          })}
         >
           <Header />
           <TabsTop />
+
           <Watermark
             className="h-full flex flex-col flex-1"
             content={
               configSetting.watermark ? configSetting.title ?? "no title" : ""
             }
           >
-            <main className={`${styles["app-main"]}`}>
+            <main className={styles["app-main"]}>
               <KeepAlive id={pathname} name={pathname}>
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -79,6 +83,7 @@ const Layout: React.FC = () => {
           </Watermark>
         </section>
       </section>
+
       {configSetting.drawerSetting && <SettingDrawer />}
     </div>
   );

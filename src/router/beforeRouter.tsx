@@ -17,7 +17,7 @@ const BeforeRouter: FC<BeforeRouterProps> = ({ children }) => {
   const dispatch: AppDispatch = useDispatch();
   const layout = (localStorage.getItem(LAYOUT_KEY) || "side") as LayoutType;
   useEffect(() => {
-    localStorage.setItem(LAYOUT_KEY, "side");
+    localStorage.setItem(LAYOUT_KEY, layout);
     dispatch(setLayout(layout));
   }, [layout, dispatch]);
 

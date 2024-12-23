@@ -1,20 +1,37 @@
 import type { MenuProps } from "antd";
 import { useCommonStore } from "@/stores";
 import { findParentMenuKey } from "@/utils/menu";
-import styles from "../index.module.less";
+import styles from "@/layout/index.module.less";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/stores";
 import { setActiveKey, addTabs } from "@/stores/tabs";
+import { MenuType } from "#/menu";
 
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const { menuList, routeList, isCollapsed, configSetting, isPhone } =
-    useCommonStore();
+  const {
+    menuList,
+    routeList,
+    isCollapsed,
+    configSetting,
+    isPhone,
+    theme,
+    spiltMenu,
+  } = useCommonStore();
   const { pathname } = useLocation();
 
   const [selectKey, setSelectKey] = useState<string>("");
   const [openKeys, setopenKeys] = useState<string[]>([]);
+  const [menuData, setmenuData] = useState<MenuType[]>([]);
+
+  useEffect(() => {
+    if (configSetting.layout === "mix") {
+      setmenuData(spiltMenu);
+    } else {
+      setmenuData(menuList);
+    }
+  }, [menuList, configSetting, spiltMenu]);
 
   useEffect(() => {
     const current = routeList.findIndex((item) => item.path === pathname);
@@ -39,6 +56,7 @@ const App: React.FC = () => {
   };
   return (
     <Menu
+      theme={theme}
       className={`
         ${styles["side-bar-menu-list"]}
         ${
@@ -51,15 +69,13 @@ const App: React.FC = () => {
       onClick={onClick}
       selectedKeys={[selectKey]}
       onOpenChange={onOpenChange}
-      mode={
-        configSetting.layout === "side" || isPhone ? "inline" : "horizontal"
-      }
-      items={menuList}
-      {...(configSetting.layout === "side" &&
+      mode={configSetting.layout != "top" || isPhone ? "inline" : "horizontal"}
+      items={menuData}
+      {...(configSetting.layout !== "top" &&
         !isPhone && {
           inlineCollapsed: isCollapsed,
         })}
-      {...(configSetting.layout === "side" && { openKeys: openKeys })}
+      {...(configSetting.layout != "top" && { openKeys: openKeys })}
     />
   );
 };

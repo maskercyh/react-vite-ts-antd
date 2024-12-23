@@ -62,6 +62,14 @@ const SettingDrawer: React.FC = () => {
         <Button
           type="primary"
           style={{ marginBottom: 16 }}
+          onClick={layoutSet("mix")}
+        >
+          mix
+        </Button>
+
+        <Button
+          type="primary"
+          style={{ marginBottom: 16 }}
           onClick={themeColorSet("blue")}
         >
           blue

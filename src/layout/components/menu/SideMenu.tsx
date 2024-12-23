@@ -2,13 +2,14 @@ import { useCommonStore } from "@/stores";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/stores";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import Menu from "./Menu";
-import Logo from "./Logo";
-import styles from "../index.module.less";
+import Menu from "@/layout/components/menu/Menu";
+import Logo from "@/layout/components/Logo";
+import styles from "@/layout/index.module.less";
 import LogoImg from "@/assets/react.svg";
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { configSetting, isCollapsed, isPhone } = useCommonStore();
+
   return (
     <aside
       className={`

@@ -23,6 +23,7 @@ export const store = configureStore({
  * 获取常用的状态数据
  */
 export const useCommonStore = () => {
+    const spiltMenu = useSelector((state: RootState) => state.menu.spiltMenu)
     const isLock = useSelector((state: RootState) => state.tabs.isLock)
     const configSetting = useSelector((state: RootState) => state.public)
     //token
@@ -60,6 +61,7 @@ export const useCommonStore = () => {
 
     const activeKey = useSelector((state: RootState) => state.tabs.activeKey);
     return {
+        spiltMenu,
         activeKey,
         isLock,
         configSetting,

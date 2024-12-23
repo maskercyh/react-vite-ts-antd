@@ -1,6 +1,6 @@
 import type { LayoutSetting } from "#/public"
 export default {
-    layout: "side",
+    layout: "top",
     drawerSetting: true,
     routeType: 'browser',
     theme: 'light',

@@ -57,6 +57,7 @@ declare global {
   const setRefreshPage: typeof import('../src/stores/public')['setRefreshPage']
   const setRouteList: typeof import('../src/stores/user')['setRouteList']
   const setSelectedKeys: typeof import('../src/stores/menu')['setSelectedKeys']
+  const setSpiltMenu: typeof import('../src/stores/menu')['setSpiltMenu']
   const setThemeValue: typeof import('../src/stores/public')['setThemeValue']
   const setToken: typeof import('../src/stores/user')['setToken']
   const setUserInfo: typeof import('../src/stores/user')['setUserInfo']

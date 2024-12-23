@@ -35,15 +35,23 @@ const App: React.FC = () => {
     });
 
     // 如果 pathname 是根路径，直接设置 current 为 0
-    if (pathname === "/") {
-      current = 0;
-    }
+    // if (pathname === "/") {
+    //   current = 0;
+    // }
 
     // 确保 current 是有效的
     if (current !== -1 && menuList[current]) {
-      const { key } = menuList[current];
-      setSelectKey(key); // 更新选中的菜单项
-      dispatch(setSpiltMenu(menuList[current].children ?? [])); // 更新子菜单
+      if (pathname === "/") {
+        const mentData = menuList[0];
+        const { key } = mentData;
+        setSelectKey(key); // 更新选中的菜单项
+        dispatch(setSpiltMenu(mentData.children ?? [])); // 更新子菜单
+      } else {
+        const mentData = menuList[current];
+        const { key } = mentData;
+        setSelectKey(key); // 更新选中的菜单项
+        dispatch(setSpiltMenu(mentData.children ?? [])); // 更新子菜单
+      }
     }
   }, [pathname, menuList, dispatch]);
 

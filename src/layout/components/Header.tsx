@@ -21,12 +21,6 @@ export default function Header() {
 
   const showMenu = () => setOpen(true);
 
-  const RenderMenu = () => {
-    if (configSetting.layout === "top" && !isPhone) return <Menu />;
-    if (configSetting.layout === "mix" && !isPhone) return <SplitMenu />;
-    return null;
-  };
-
   return (
     <>
       {configSetting.layout === "mix" && !isPhone && (
@@ -72,7 +66,8 @@ export default function Header() {
           )}
 
           <div className="flex-1">
-            <RenderMenu />
+            {configSetting.layout === "top" && !isPhone && <Menu />}
+            {configSetting.layout === "mix" && !isPhone && <SplitMenu />}
           </div>
 
           <div className={classNames(styles["header-handle-space"])}>

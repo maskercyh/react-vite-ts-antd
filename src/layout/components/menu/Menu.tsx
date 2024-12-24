@@ -8,6 +8,8 @@ import { setActiveKey, addTabs } from "@/stores/tabs";
 import { MenuType } from "#/menu";
 
 const App: React.FC = () => {
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -26,18 +28,18 @@ const App: React.FC = () => {
   const [menuData, setmenuData] = useState<MenuType[]>([]);
 
   useEffect(() => {
-    if (configSetting.layout === "mix") {
+    if (configSetting.layout === "mix" && !isPhone) {
       setmenuData(spiltMenu);
     } else {
       setmenuData(menuList);
     }
-  }, [menuList, configSetting, spiltMenu]);
+  }, [configSetting, spiltMenu, isPhone]);
 
   useEffect(() => {
     const current = routeList.findIndex((item) => item.path === pathname);
     if (current == -1) return;
     const { key, path } = routeList[current];
-    if (configSetting.layout === "side")
+    if (configSetting.layout != "top")
       setopenKeys(findParentMenuKey(menuList, path));
     setSelectKey(key);
   }, [pathname]);
@@ -50,9 +52,8 @@ const App: React.FC = () => {
     dispatch(setActiveKey(path));
     navigate(path);
   };
-
   const onOpenChange: MenuProps["onOpenChange"] = (newOpenKeys) => {
-    if (!isPhone) setopenKeys(newOpenKeys);
+    setopenKeys(newOpenKeys);
   };
   return (
     <Menu

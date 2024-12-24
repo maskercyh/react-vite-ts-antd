@@ -13,7 +13,7 @@ function AppContent() {
   const { theme, configSetting } = useCommonStore();
   const { i18n } = useTranslation();
   const currentLanguage = i18n.language;
-
+  console.log(currentLanguage);
   const algorithm = [theme === "dark" ? darkAlgorithm : defaultAlgorithm];
   if (configSetting.compact) algorithm.push(compactAlgorithm);
 

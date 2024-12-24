@@ -2,14 +2,12 @@ import type { TabPaneProps } from 'antd';
 import { createSlice } from '@reduxjs/toolkit';
 interface NavData {
   label: string;
-  labelZh: string;
   labelEn: string;
 }
 export interface TabsData extends Omit<TabPaneProps, 'tab'> {
   key: string;
   label: React.ReactNode;
   path: string
-  labelZh: React.ReactNode;
   labelEn: React.ReactNode;
 }
 

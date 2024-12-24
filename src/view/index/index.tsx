@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import type { AppDispatch } from "@/stores";
 function App() {
+  const { t } = useTranslation();
   const { RangePicker } = DatePicker;
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function App() {
   }
   return (
     <>
-      <h1>Current Path: {pathname}</h1>
+      <h1>{t("content.clipboard")}：</h1>
       <RangePicker />
       <div>
         <a href="https://vite.dev" target="_blank">

@@ -11,22 +11,18 @@ import classNames from "classnames";
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const { menuList, routeList, isCollapsed, configSetting, isPhone, theme } =
-    useCommonStore();
+  const { menuList, configSetting, isPhone, theme } = useCommonStore();
   const { pathname } = useLocation();
 
-  const [selectKey, setSelectKey] = useState<string>("");
+  const [selectKey, setSelectKey] = useState<string>();
   const [splitMenu, setSplitMenu] = useState<any[]>([]);
 
   useEffect(() => {
-    // 计算新的 splitMenu，只在 menuList 发生变化时更新
-    const updatedMenu = menuList.map((item) => ({
-      ...item,
-      children: [], // 设置空的子菜单项
-    }));
+    const updatedMenu = menuList.map((item) => {
+      const { children, ...tempItem } = item;
+      return tempItem;
+    });
     setSplitMenu(updatedMenu);
-
-    // 查找当前选中的菜单项
     let current = menuList.findIndex((item) => {
       if (item.path !== "/") {
         return pathname.startsWith(item.path);
@@ -34,32 +30,22 @@ const App: React.FC = () => {
       return false;
     });
 
-    // 如果 pathname 是根路径，直接设置 current 为 0
-    // if (pathname === "/") {
-    //   current = 0;
-    // }
-
-    // 确保 current 是有效的
     if (current !== -1 && menuList[current]) {
       if (pathname === "/") {
-        const mentData = menuList[0];
-        const { key } = mentData;
-        setSelectKey(key); // 更新选中的菜单项
-        dispatch(setSpiltMenu(mentData.children ?? [])); // 更新子菜单
-      } else {
-        const mentData = menuList[current];
-        const { key } = mentData;
-        setSelectKey(key); // 更新选中的菜单项
-        dispatch(setSpiltMenu(mentData.children ?? [])); // 更新子菜单
+        current = 0;
       }
+      const mentData = menuList[current];
+      const { key } = mentData;
+      setSelectKey(key);
+      dispatch(setSpiltMenu(mentData.children ?? []));
     }
-  }, [pathname, menuList, dispatch]);
-
-  console.log(splitMenu);
-
+  }, []);
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log("Menu item clicked:", e.key);
-    // navigate(e.key); // 你可以根据菜单项的 key 来进行导航
+    const current = menuList.findIndex((menu) => menu.key === e.key);
+    if (current === -1) return;
+    setSelectKey(splitMenu[current].key);
+    dispatch(setSpiltMenu(menuList[current].children ?? []));
+    if (!menuList[current].children) navigate(menuList[current].path);
   };
 
   return (

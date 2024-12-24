@@ -45,7 +45,7 @@ const BeforeRouter: FC<BeforeRouterProps> = ({ children }) => {
     return () => {
       window.removeEventListener("resize", handleIsPhone);
     };
-  }, [dispatch]);
+  }, []);
   return <>{children}</>;
 };
 

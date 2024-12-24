@@ -27,27 +27,25 @@ const Layout: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { pathname } = useLocation();
   const [messageApi, contextHolder] = message.useMessage();
+  const { i18n } = useTranslation();
 
-  // 监测是否需要刷新
+  const currentLanguage = i18n.language;
   useEffect(() => {
     if (pathname === "/") {
       navigate(menuList[0].path);
     }
-    // versionCheck(messageApi);
-  }, [pathname]);
-  // Use message API to display notifications
-  useEffect(() => {
-    if (pathname === "/somePath") {
-      messageApi.success("Welcome to the new page!");
-    }
-  }, [pathname, messageApi]);
-
+  }, [pathname, currentLanguage]);
+  const shouldRenderSideMenu = useMemo(() => {
+    return (
+      (configSetting.layout === "side" ||
+        (configSetting.layout === "mix" && spiltMenu.length != 0)) &&
+      !isPhone
+    );
+  }, [configSetting.layout, spiltMenu.length, isPhone]);
   return (
     <div className={classNames(styles["app-layout"])}>
       <section className={classNames(styles["app-container-wrap"])}>
-        {(configSetting.layout === "side" ||
-          (configSetting.layout === "mix" && spiltMenu.length)) &&
-          !isPhone && <SideMenu />}
+        {shouldRenderSideMenu && <SideMenu />}
 
         <section
           className={classNames(styles["app-main-wrap"], {

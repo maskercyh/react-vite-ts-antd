@@ -40,32 +40,37 @@ app.post('/api/user/info', (req, res) => {
                 {
                     "path": "/",
                     "label": "首页",
+                    "labelEn": 'index',
                     "key": "index",
                     "icon": "SlackSquareOutlined",
                     "element": "index/index",
                 },
                 {
                     "label": "仪表盘",
+                    "labelEn": '仪表盘',
                     "key": "dashboard",
                     "icon": "SlackSquareOutlined",
                     "path": "dashboard",
                     "element": "dashboard/index",
                 },
                 {
-                    "label": "组件",
+                    "label": "组件1",
                     "key": "components3",
+                    "labelEn": 'components1',
                     "icon": "SlackSquareOutlined",
                     "path": "components3",
                     "children": [
                         {
-                            "label": "基础",
+                            "label": "基础1",
                             "key": "basic",
+                            "labelEn": 'basic1',
                             "icon": "SlackSquareOutlined",
                             "path": 'basic',
                             "children": [
                                 {
                                     "label": "按钮",
                                     "key": "button",
+                                    "labelEn": 'button',
                                     "icon": "SlackSquareOutlined",
                                     "path": "button",
                                     "element": "components/basic/button",
@@ -73,6 +78,7 @@ app.post('/api/user/info', (req, res) => {
                                 {
                                     "label": "chart",
                                     "key": "chart",
+                                    "labelEn": 'chart',
                                     "icon": "SlackSquareOutlined",
                                     "path": "chart",
                                     "element": "components/basic/chart",
@@ -81,37 +87,7 @@ app.post('/api/user/info', (req, res) => {
                         },
                     ],
                 },
-                {
-                    "label": "组件",
-                    "key": "components2",
-                    "icon": "SlackSquareOutlined",
-                    "path": "components2",
-                    "children": [
-                        {
-                            "label": "基础",
-                            "key": "basic1",
-                            "icon": "SlackSquareOutlined",
-                            // "type": "group",
-                            "path": 'basic1',
-                            "children": [
-                                {
-                                    "label": "按钮",
-                                    "key": "button1",
-                                    "icon": "SlackSquareOutlined",
-                                    "path": "button1",
-                                    "element": "components/basic/button",
-                                },
-                                {
-                                    "label": "chart",
-                                    "key": "chart1",
-                                    "icon": "SlackSquareOutlined",
-                                    "path": "chart1",
-                                    "element": "components/basic/chart",
-                                }
-                            ]
-                        },
-                    ],
-                }
+
             ],
             user: {
                 userName: '123'

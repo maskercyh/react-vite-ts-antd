@@ -47,7 +47,7 @@ app.post('/api/user/info', (req, res) => {
                 },
                 {
                     "label": "仪表盘",
-                    "labelEn": '仪表盘',
+                    "labelEn": 'dashboard',
                     "key": "dashboard",
                     "icon": "SlackSquareOutlined",
                     "path": "dashboard",

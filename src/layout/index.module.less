@@ -33,12 +33,19 @@
 .app-layout {
   height: 100%;
   background-color: var(--layout-bg);
-
+  overflow-x: hidden;
   .app-container-wrap {
     position: relative;
     width: 100%;
-    height: 100%;
     display: flex;
+    min-height: 100%;
+    .side-bar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      z-index: 100;
+    }
     .side-bar {
       width: var(--el-left-menu-width);
       transition: var(--el-transition);
@@ -48,6 +55,7 @@
       flex-direction: column;
       height: 100%;
       overflow: hidden;
+
       z-index: var(--el-zindex-top);
       border-right: none;
       .logo-space {
@@ -99,10 +107,9 @@
     .app-main-wrap {
       position: relative;
       transition: var(--el-transition);
-      min-height: 100%;
       margin: 0 auto;
-      display: flex;
       flex: auto;
+      display: flex;
       flex-direction: column;
 
       .header-container-wrap {
@@ -151,9 +158,9 @@
         position: fixed;
         left: 0;
         z-index: 1000;
+        top: 0;
       }
       .tab-top-container {
-        position: relative;
         display: flex;
         align-content: center;
         align-items: center;
@@ -165,10 +172,17 @@
         }
       }
       .app-main {
-        padding: var(--el-padding);
-        overflow-y: scroll;
+        margin: 24px;
         flex: auto;
-        padding-top: calc(var(--el-padding) / 2);
+        display: flex;
+        .app-main-flex {
+          display: flex;
+          width: 100%;
+          background: var(--bg-color);
+          flex-direction: column;
+          border-radius: 5px;
+          padding: 5px 10px;
+        }
       }
     }
   }

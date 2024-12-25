@@ -4,6 +4,7 @@ import { STORAGE_AUTHORIZE_KEY } from '@/stores/public';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userLogout } from "@/api/user";
 import { RouteType } from '#/menu'
+import { setNav } from './tabs'
 
 interface UserData {
   token: string;
@@ -69,6 +70,7 @@ export const logout = createAsyncThunk(
       removeLocalInfo(STORAGE_AUTHORIZE_KEY);
       // 清除用户信息
       dispatch(userSlice.actions.clearInfo());
+      dispatch(closeAllTab())
     }
   }
 );

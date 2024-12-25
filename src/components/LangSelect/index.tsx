@@ -3,7 +3,7 @@ import { Dropdown } from "antd";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { LANG } from "@/stores/public";
-export type Langs = "zh-CN" | "en";
+export type Langs = "zh" | "en";
 
 function I18n() {
   const { i18n } = useTranslation();
@@ -13,8 +13,8 @@ function I18n() {
     const currentLanguage = i18n.language;
 
     if (!lang) {
-      localStorage.setItem(LANG, "zh-CN");
-      i18n.changeLanguage("zh-CN");
+      localStorage.setItem(LANG, "zh");
+      i18n.changeLanguage("zh");
     } else if (currentLanguage !== lang) {
       i18n.changeLanguage(lang);
     }
@@ -23,7 +23,7 @@ function I18n() {
   // 下拉菜单内容
   const items: MenuProps["items"] = [
     {
-      key: "zh-CN",
+      key: "zh",
       label: <span>中文</span>,
     },
     {

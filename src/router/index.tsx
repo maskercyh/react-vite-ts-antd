@@ -6,24 +6,35 @@ import GenerRoute from "./GenerRoute";
 import zhCN from "antd/es/locale/zh_CN";
 import enUS from "antd/es/locale/en_US";
 import { useCommonStore } from "@/stores";
-
+import { AppDispatch } from "@/stores";
+import type { ThemeType } from "#/public";
+import { useDispatch } from "react-redux";
 const { defaultAlgorithm, darkAlgorithm, compactAlgorithm } = theme;
 
 function AppContent() {
-  const { theme, configSetting } = useCommonStore();
+  const { configSetting } = useCommonStore();
   const { i18n } = useTranslation();
+  const dispatch: AppDispatch = useDispatch();
   const currentLanguage = i18n.language;
-  console.log(currentLanguage);
-  const algorithm = [theme === "dark" ? darkAlgorithm : defaultAlgorithm];
-  if (configSetting.compact) algorithm.push(compactAlgorithm);
+  const themeCache = (localStorage.getItem(THEME_KEY) || "light") as ThemeType;
+  const [colorPrimary, setColorPrimary] = useState(configSetting.colorPrimary);
+  useEffect(() => {
+    if (themeCache === "dark") {
+      document.body.className = "dark";
+    } else {
+      document.body.className = "light";
+    }
+    dispatch(setThemeValue(themeCache));
+  }, [themeCache]);
 
   useEffect(() => {
-    if (theme === "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [theme]);
+    setColorPrimary(configSetting.colorPrimary);
+  }, [configSetting.colorPrimary]);
+
+  useEffect(() => {}, [currentLanguage]);
+
+  const algorithm = [themeCache === "dark" ? darkAlgorithm : defaultAlgorithm];
+  if (configSetting.compact) algorithm.push(compactAlgorithm);
 
   return (
     <ConfigProvider
@@ -31,7 +42,7 @@ function AppContent() {
       theme={{
         algorithm: algorithm,
         token: {
-          colorPrimary: configSetting.colorPrimary,
+          colorPrimary: colorPrimary,
         },
       }}
     >

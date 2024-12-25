@@ -34,14 +34,22 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <Button className="mt-25px margin-auto" onClick={handelLogout}>
+        <Button
+          className="mt-25px margin-auto"
+          onClick={handelLogout}
+          type="primary"
+        >
           退出登录
         </Button>
-        <Button className="mt-25px margin-auto" onClick={toDdashboard}>
+        <Button
+          className="mt-25px margin-auto"
+          onClick={toDdashboard}
+          type="primary"
+        >
           toDdashboard
         </Button>
 
-        <Button onClick={() => setCount((count) => count + 1)}>
+        <Button onClick={() => setCount((count) => count + 1)} type="primary">
           count is {count}
         </Button>
         <p>

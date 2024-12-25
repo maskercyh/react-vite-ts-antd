@@ -8,11 +8,12 @@ import SettingDrawer from "./components/SettingDrawer";
 import SideMenu from "./components/menu/SideMenu";
 import Header from "./components/Header";
 import TabsTop from "./components/TabsTop";
-import { KeepAlive } from "react-activation";
+import { KeepAlive, useAliveController } from "react-activation";
 import styles from "./index.module.less";
 import { AnimatePresence, motion } from "framer-motion";
 import { Watermark, message } from "antd";
 import classNames from "classnames";
+
 const Layout: React.FC = () => {
   const {
     menuList,
@@ -28,8 +29,21 @@ const Layout: React.FC = () => {
   const { pathname } = useLocation();
   const [messageApi, contextHolder] = message.useMessage();
   const { i18n } = useTranslation();
-
+  const { clear, refreshScope, getCachingNodes } = useAliveController();
   const currentLanguage = i18n.language;
+
+  const refreshAllKeepalive = () => {
+    const cacheNodes = getCachingNodes();
+    for (let i = 0; i < cacheNodes?.length; i++) {
+      const { name } = cacheNodes[i];
+      if (name) refreshScope(name);
+    }
+  };
+
+  useEffect(() => {
+    refreshAllKeepalive();
+  }, [currentLanguage]);
+
   useEffect(() => {
     if (pathname === "/") {
       navigate(menuList[0].path);
@@ -57,28 +71,30 @@ const Layout: React.FC = () => {
           <Header />
           <TabsTop />
 
-          <Watermark
-            className="h-full flex flex-col flex-1"
-            content={
-              configSetting.watermark ? configSetting.title ?? "no title" : ""
-            }
-          >
-            <main className={styles["app-main"]}>
-              <KeepAlive id={pathname} name={pathname}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={pathname}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Outlet />
-                  </motion.div>
-                </AnimatePresence>
-              </KeepAlive>
-            </main>
-          </Watermark>
+          <main className={styles["app-main"]}>
+            <Watermark
+              className="h-full flex flex-col flex-1"
+              content={
+                configSetting.watermark ? configSetting.title ?? "no title" : ""
+              }
+            >
+              <div className={styles["app-main-flex"]}>
+                <KeepAlive id={pathname} name={pathname} enabled={false}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={pathname}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Outlet />
+                    </motion.div>
+                  </AnimatePresence>
+                </KeepAlive>
+              </div>
+            </Watermark>
+          </main>
         </section>
       </section>
 

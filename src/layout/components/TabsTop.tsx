@@ -61,41 +61,51 @@ const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
 };
 
 export default function TabsTop() {
+  const { drop, clear } = useAliveController();
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   const navigate = useNavigate();
   const { refresh } = useAliveController();
   const { pathname, search } = useLocation();
-  const {
-    tabs,
-    permissions,
-    isMaximize,
-    menuList,
-    routeList,
-    activeKey,
-    isLock,
-  } = useCommonStore();
+  const { tabs, menuList, routeList, activeKey, isLock } = useCommonStore();
   const [loading, setLoading] = useState(false);
   const [time, setTime] = useState<null | NodeJS.Timeout>(null);
   const [refreshTime, setRefreshTime] = useState<null | NodeJS.Timeout>(null);
   const url = pathname + search;
   const dispatch: AppDispatch = useDispatch();
-
-  // 初次渲染时添加 tabs
+  const [tabData, setTabData] = useState<any>([]);
+  useEffect(() => {
+    setTabData(
+      tabs.map((item) => {
+        const { labelEn, ...tempItem } = item;
+        if (currentLanguage === "en") {
+          tempItem.label = labelEn;
+        }
+        return tempItem;
+      })
+    );
+  }, [currentLanguage, tabs]);
   useEffect(() => {
     const route = routeList.find((item) => item.path === pathname) as RouteType;
     if (route) {
       dispatch(
-        addTabs({ key: route.path, path: route.path, label: route.label })
+        addTabs({
+          key: route.path,
+          path: route.path,
+          label: route.label,
+          labelEn: route.labelEn,
+        })
       );
       dispatch(setActiveKey(route.path));
     }
-  }, [pathname, routeList, dispatch]);
+  }, [pathname]);
 
-  // 处理标签关闭
   const remove = (targetKey: string) => {
+    drop(targetKey);
+    clear();
     dispatch(closeTabs(targetKey));
   };
 
-  // 当标签变化时，更新 activeKey
   useEffect(() => {
     if (activeKey !== url) {
       const key = isLock ? activeKey : url;
@@ -106,38 +116,31 @@ export default function TabsTop() {
     }
   }, [activeKey, url, dispatch, navigate, isLock]);
 
-  // 设置拖拽传感器
-  const sensor = useSensor(PointerSensor, {
-    activationConstraint: { distance: 10 },
-  });
-
-  // 处理标签修改（增加或删除）
   const onEdit = (targetKey: TargetKey, action: "add" | "remove") => {
     if (action === "remove") {
       remove(targetKey as string);
     }
   };
-
-  // 处理拖拽排序
+  const sensor = useSensor(PointerSensor, {
+    activationConstraint: { distance: 10 },
+  });
   const onDragEnd = ({ active, over }: DragEndEvent) => {
     if (active.id !== over?.id) {
       const oldIndex = tabs.findIndex((tab) => tab.key === active.id);
       const newIndex = tabs.findIndex((tab) => tab.key === over?.id);
       if (oldIndex !== -1 && newIndex !== -1) {
         const updatedTabs = arrayMove(tabs, oldIndex, newIndex);
-        dispatch(setNav(updatedTabs)); // 更新排序后的 tabs
+        dispatch(setNav(updatedTabs));
       }
     }
   };
 
-  // 处理 tab 切换
   const onChange = (key: string) => {
     const tab = tabs.find((tab) => tab.key === key) as TabsData;
     dispatch(setActiveKey(tab.key));
     navigate(tab.key);
   };
 
-  // 处理刷新操作
   const onClickRefresh = () => {
     if (loading) return;
     setLoading(true);
@@ -162,13 +165,11 @@ export default function TabsTop() {
     };
   }, [time, refreshTime]);
 
-  // 下拉菜单项
   const items = [
     { key: "refresh", label: <span>刷新</span> },
     { key: "close", label: <span>关闭</span> },
   ];
 
-  // 下拉菜单点击事件
   const onMenuClick = (e: any) => {
     if (e.key === "refresh") {
       onClickRefresh();
@@ -269,7 +270,7 @@ export default function TabsTop() {
         onEdit={onEdit}
         onChange={onChange}
         activeKey={activeKey}
-        items={tabs}
+        items={tabData}
         type="editable-card"
         className={styles["tab-top-nav-list"]}
         tabBarGutter={5}

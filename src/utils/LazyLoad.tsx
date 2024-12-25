@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Outlet } from "react-router-dom";
+
 const pages: Record<string, () => Promise<any>> = import.meta.glob(
   "../view/**/*.tsx"
 );

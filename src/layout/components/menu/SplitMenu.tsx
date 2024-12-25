@@ -1,6 +1,7 @@
 import type { MenuProps } from "antd";
 import { useCommonStore } from "@/stores";
 import styles from "@/layout/index.module.less";
+import { menuLang } from "@/utils/menu";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/stores";
 import { setSpiltMenu } from "@/stores/menu";
@@ -11,18 +12,25 @@ import classNames from "classnames";
 const App: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   const { menuList, configSetting, isPhone, theme } = useCommonStore();
   const { pathname } = useLocation();
 
-  const [selectKey, setSelectKey] = useState<string>();
+  const [selectKey, setSelectKey] = useState<string>("");
   const [splitMenu, setSplitMenu] = useState<any[]>([]);
-
   useEffect(() => {
-    const updatedMenu = menuList.map((item) => {
-      const { children, ...tempItem } = item;
-      return tempItem;
-    });
-    setSplitMenu(updatedMenu);
+    setSplitMenu(
+      menuLang(
+        currentLanguage,
+        menuList.map((item) => {
+          const { children, ...tempItem } = item;
+          return tempItem;
+        })
+      )
+    );
+  }, [currentLanguage]);
+  useEffect(() => {
     let current = menuList.findIndex((item) => {
       if (item.path !== "/") {
         return pathname.startsWith(item.path);

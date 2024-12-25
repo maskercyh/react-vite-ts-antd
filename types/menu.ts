@@ -2,6 +2,7 @@
 export interface MenuType {
     id: number
     label: string
+    labelEn?: string
     key: string,
     path: string
     hidden: boolean
@@ -13,16 +14,16 @@ export interface MenuType {
 export interface MenuItem {
     key: string
     label: string
+    labelEn: string
     path: string
-
     icon: React.ReactNode
     children?: MenuItem[]
 }
 
-//路由
 export interface RouteType {
     key: string
     path: string
     label: string
+    labelEn: string
 }
 

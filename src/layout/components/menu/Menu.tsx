@@ -1,6 +1,6 @@
 import type { MenuProps } from "antd";
 import { useCommonStore } from "@/stores";
-import { findParentMenuKey } from "@/utils/menu";
+import { findParentMenuKey, menuLang } from "@/utils/menu";
 import styles from "@/layout/index.module.less";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/stores";
@@ -24,36 +24,36 @@ const App: React.FC = () => {
   const { pathname } = useLocation();
 
   const [selectKey, setSelectKey] = useState<string>("");
-  const [openKeys, setopenKeys] = useState<string[]>([]);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [menuData, setmenuData] = useState<MenuType[]>([]);
 
   useEffect(() => {
     if (configSetting.layout === "mix" && !isPhone) {
-      setmenuData(spiltMenu);
+      setmenuData(menuLang(currentLanguage, spiltMenu));
     } else {
-      setmenuData(menuList);
+      setmenuData(menuLang(currentLanguage, menuList));
     }
-  }, [configSetting, spiltMenu, isPhone]);
+  }, [configSetting, spiltMenu, isPhone, currentLanguage]);
 
   useEffect(() => {
     const current = routeList.findIndex((item) => item.path === pathname);
     if (current == -1) return;
     const { key, path } = routeList[current];
     if (configSetting.layout != "top")
-      setopenKeys(findParentMenuKey(menuList, path));
+      setOpenKeys(findParentMenuKey(menuList, path));
     setSelectKey(key);
   }, [pathname]);
 
   const onClick: MenuProps["onClick"] = (e) => {
     const current = routeList.findIndex((item) => item.key === e.key);
     if (current === -1) return;
-    const { path, label } = routeList[current];
-    dispatch(addTabs({ key: path, label }));
+    const { path, label, labelEn } = routeList[current];
+    dispatch(addTabs({ key: path, label, labelEn }));
     dispatch(setActiveKey(path));
     navigate(path);
   };
   const onOpenChange: MenuProps["onOpenChange"] = (newOpenKeys) => {
-    setopenKeys(newOpenKeys);
+    setOpenKeys(newOpenKeys);
   };
   return (
     <Menu

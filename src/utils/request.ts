@@ -47,7 +47,7 @@ async function requestHandler(config: InternalAxiosRequestConfig & RequestConfig
   // 增加多语言的配置
   const locale = localStorage.getItem(LANG);
   if (locale)
-    config.headers.set('Accept-Language', locale ?? 'zh-CN')
+    config.headers.set('Accept-Language', locale ?? 'zh')
   return config
 }
 

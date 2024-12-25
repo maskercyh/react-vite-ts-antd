@@ -57,7 +57,6 @@ const GenRoute: FC = () => {
       ]);
     }
   }, [routeList]);
-
   const element = useRoutes(routes);
   if (loading) {
     return <Loading />;

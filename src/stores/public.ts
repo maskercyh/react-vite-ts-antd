@@ -15,8 +15,14 @@ export const publicSlice = createSlice({
     isRefreshPage: false // 重新加载页面
   },
   reducers: {
+    setWatermark: (state, action) => {
+      state.watermark = action.payload;
+    },
     setLayout: (state, action) => {
       state.layout = action.payload;
+    },
+    setCompact: (state, action) => {
+      state.compact = action.payload;
     },
 
     setColorPrimary: (state, action) => {
@@ -44,6 +50,8 @@ export const publicSlice = createSlice({
 export const {
   setThemeValue,
   setFullscreen,
+  setCompact,
+  setWatermark,
   // setRefresh,
   // setRefreshPage,
   setLayout,

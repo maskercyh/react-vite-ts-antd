@@ -4,7 +4,7 @@ import { toggleCollapsed, togglePhone } from "@/stores/menu";
 import { useLocation } from "react-router-dom";
 import { useCommonStore } from "@/stores";
 import type { AppDispatch } from "@/stores";
-import SettingDrawer from "./components/SettingDrawer";
+import SettingDrawer from "./components/settingDrawer";
 import SideMenu from "./components/menu/SideMenu";
 import Header from "./components/Header";
 import TabsTop from "./components/TabsTop";
@@ -57,49 +57,47 @@ const Layout: React.FC = () => {
     );
   }, [configSetting.layout, spiltMenu.length, isPhone]);
   return (
-    <div className={classNames(styles["app-layout"])}>
-      <section className={classNames(styles["app-container-wrap"])}>
-        {shouldRenderSideMenu && <SideMenu />}
+    <Watermark
+      className="h-full flex flex-col flex-1"
+      content={configSetting.watermark ? configSetting.title ?? "no title" : ""}
+    >
+      <div className={classNames(styles["app-layout"])}>
+        <section className={classNames(styles["app-container-wrap"])}>
+          {shouldRenderSideMenu && <SideMenu />}
 
-        <section
-          className={classNames(styles["app-main-wrap"], {
-            [styles["app-main-side-menu"]]:
-              configSetting.layout === "side" && !isPhone,
-            [styles["is-collapse-main"]]: isCollapsed && !isPhone,
-          })}
-        >
-          <Header />
-          <TabsTop />
+          <section
+            className={classNames(styles["app-main-wrap"], {
+              [styles["app-main-side-menu"]]:
+                configSetting.layout === "side" && !isPhone,
+              [styles["is-collapse-main"]]: isCollapsed && !isPhone,
+            })}
+          >
+            <Header />
+            <TabsTop />
 
-          <main className={styles["app-main"]}>
-            <Watermark
-              className="h-full flex flex-col flex-1"
-              content={
-                configSetting.watermark ? configSetting.title ?? "no title" : ""
-              }
-            >
+            <main className={styles["app-main"]}>
               <div className={styles["app-main-flex"]}>
-                <KeepAlive id={pathname} name={pathname} enabled={false}>
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={pathname}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Outlet />
-                    </motion.div>
-                  </AnimatePresence>
-                </KeepAlive>
+                {/* <KeepAlive id={pathname} name={pathname} enabled={false}> */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={pathname}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Outlet />
+                  </motion.div>
+                </AnimatePresence>
+                {/* </KeepAlive> */}
               </div>
-            </Watermark>
-          </main>
+            </main>
+          </section>
         </section>
-      </section>
 
-      {configSetting.drawerSetting && <SettingDrawer />}
-    </div>
+        {configSetting.drawerSetting && <SettingDrawer />}
+      </div>
+    </Watermark>
   );
 };
 

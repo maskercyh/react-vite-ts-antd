@@ -1,4 +1,5 @@
 export default {
+
   currentName: 'Background Management System',
   total: 'total',
   date: 'date',
@@ -19,7 +20,17 @@ export default {
   successfullyDeleted: 'Successfully deleted',
   fullScreen: 'Full screen',
   exitFullscreen: 'Exit fullscreen',
-  themes: 'Themes',
+  themes: {
+    dark: 'Dark',
+    light: 'Light',
+    inverted: 'Inverted',
+  },
+  layout: {
+    side: 'Side layout mode',
+    top: 'Top layout mode',
+    mix: 'Mix layout mode',
+  },
+  compact: 'Compact Mode',
   changePassword: 'Change Password',
   signOut: 'Sign Out',
   signOutMessage: 'Are you sure to log out of the system?',

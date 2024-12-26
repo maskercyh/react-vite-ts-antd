@@ -2,7 +2,7 @@ import { ItemType } from 'antd/es/menu/interface';
 import type { ColumnsType } from 'antd/lib/table';
 
 export type LayoutType = 'mix' | 'side' | 'top'
-export type ThemeType = 'dark' | 'light'
+export type ThemeType = 'dark' | 'light' | 'inverted'
 
 export interface LayoutSetting {
   logo?: string
@@ -11,7 +11,7 @@ export interface LayoutSetting {
   drawerSetting: boolean
   layout: LayoutType
   routeType: 'hash' | 'browser'
-  theme: 'light' | 'dark'
+  theme: ThemeType
   colorPrimary: string
   locale?: string
   keepAlive: boolean

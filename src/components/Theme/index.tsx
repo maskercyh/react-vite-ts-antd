@@ -4,8 +4,10 @@ import type { ThemeType } from "#/public";
 import { Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { CheckOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useAliveController } from "react-activation";
+import "./index.less";
 function Theme() {
   const { t } = useTranslation();
   const { clear, refresh, getCachingNodes } = useAliveController();
@@ -43,7 +45,6 @@ function Theme() {
       case "dark":
         document.documentElement.className = "dark";
         break;
-
       default:
         document.documentElement.className = "light";
         break;
@@ -51,23 +52,29 @@ function Theme() {
   };
 
   return (
-    <Tooltip title={t("public.themes")}>
-      <div className="flex items-center justify-center text-lg mr-4 cursor-pointer">
-        {theme}
-        {theme === "light"}
-        {theme === "light" && (
-          <button onClick={() => onChange("dark")}>dark</button>
-        )}
-        {theme !== "light" && (
-          <button
-            icon="mdi-moon-waning-crescent"
-            onClick={() => onChange("light")}
-          >
-            light
-          </button>
-        )}
-      </div>
-    </Tooltip>
+    <div className="flex items-center justify-center text-lg mr-4 cursor-pointer">
+      <Tooltip title={t("public.themes.light")}>
+        <div
+          className="light-theme theme-item"
+          onClick={() => onChange("light")}
+        >
+          {theme == "light" && (
+            <div className="item-check">
+              <CheckOutlined />
+            </div>
+          )}
+        </div>
+      </Tooltip>
+      <Tooltip title={t("public.themes.dark")}>
+        <div className="dark-theme theme-item" onClick={() => onChange("dark")}>
+          {theme == "dark" && (
+            <div className="item-check">
+              <CheckOutlined />
+            </div>
+          )}
+        </div>
+      </Tooltip>
+    </div>
   );
 }
 

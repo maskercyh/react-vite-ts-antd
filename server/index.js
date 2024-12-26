@@ -54,33 +54,57 @@ app.post('/api/user/info', (req, res) => {
                     "element": "dashboard/index",
                 },
                 {
-                    "label": "组件1",
-                    "key": "components3",
-                    "labelEn": 'components1',
+                    "label": "组件",
+                    "key": "components",
+                    "labelEn": 'components',
                     "icon": "SlackSquareOutlined",
-                    "path": "components3",
+                    "path": "components",
+                    "children": [{
+                        "label": "按钮",
+                        "key": "button",
+                        "labelEn": 'button',
+                        "icon": "SlackSquareOutlined",
+                        "path": "button",
+                        "element": "components/basic/button",
+                    },
+                    {
+                        "label": "chart",
+                        "key": "chart",
+                        "labelEn": 'chart',
+                        "icon": "SlackSquareOutlined",
+                        "path": "chart",
+                        "element": "components/basic/chart",
+                    }
+                    ]
+                },
+                {
+                    "label": "多级菜单",
+                    "key": "menu",
+                    "labelEn": 'menu',
+                    "icon": "SlackSquareOutlined",
+                    "path": "menu",
                     "children": [
                         {
-                            "label": "基础1",
+                            "label": "二级菜单",
                             "key": "basic",
                             "labelEn": 'basic1',
                             "icon": "SlackSquareOutlined",
                             "path": 'basic',
                             "children": [
                                 {
-                                    "label": "按钮",
-                                    "key": "button",
-                                    "labelEn": 'button',
+                                    "label": "三级菜单",
+                                    "key": "menu1",
+                                    "labelEn": 'menu1',
                                     "icon": "SlackSquareOutlined",
-                                    "path": "button",
+                                    "path": "menu1",
                                     "element": "components/basic/button",
                                 },
                                 {
-                                    "label": "chart",
-                                    "key": "chart",
-                                    "labelEn": 'chart',
+                                    "label": "菜单",
+                                    "key": "menu2",
+                                    "labelEn": 'menu2',
                                     "icon": "SlackSquareOutlined",
-                                    "path": "chart",
+                                    "path": "menu2",
                                     "element": "components/basic/chart",
                                 }
                             ]

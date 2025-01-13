@@ -4,10 +4,9 @@ import "@/assets/styles/index.less";
 import Router from "./router";
 import "uno.css";
 import { debounce } from "lodash";
-
 import "@/assets/styles/antd.less";
 import "@/assets/styles/theme.less";
-
+import errorReport from "@/components/ErrorReport";
 // 国际化i18n
 import "@/locales/config";
 
@@ -31,6 +30,7 @@ const resetVhAndPx = debounce(() => {
 }, 300);
 resetVhAndPx();
 window.addEventListener("resize", resetVhAndPx);
+errorReport();
 
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>

@@ -6,6 +6,7 @@ import { logout } from "~@/stores/user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import type { AppDispatch } from "@/stores";
+import { test } from "@/api/user";
 function App() {
   const { t } = useTranslation();
   const { RangePicker } = DatePicker;
@@ -18,13 +19,16 @@ function App() {
     navigate("/login");
   }
   function toDdashboard() {
-    navigate("/dashboard");
+    // test();
+    console.log(a);
+    // navigate("/dashboard");
   }
   return (
     <>
       <h1>{t("content.clipboard")}：</h1>
       <RangePicker />
       <div>
+        <img src={viteLogo + "123"} className="logo" alt="Vite logo" />
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

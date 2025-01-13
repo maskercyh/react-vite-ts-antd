@@ -1,0 +1,168 @@
+错误类型：Window
+错误类型：Window
+错误发生时间：2025-01-13 17:31:57
+错误发生时间：2025-01-13 17:31:57
+IP：::1
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+错误信息：a is not defined
+---------------------------------- 
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:35:43
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常:http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:35:49
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常:http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:37:10
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常: http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:39:03
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常: http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:39:06
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常: http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:39:08
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:46:05
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常: http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:47:41
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常: http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:47:43
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:28
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常: http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:40
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误类型：Window
+错误信息：a is not defined
+错误发生时间：2025-01-13 17:49:40
+---------------------------------- 
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:40
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:40
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:41
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:41
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:42
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:42
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:47
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:49:47
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:50:02
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：加载异常: http://localhost:6699/vite.svg123
+---------------------------------- 
+错误类型：Window
+错误发生时间：2025-01-13 17:50:03
+IP：::1
+安卓: false IOS: false 移动端: false 微信: false （安卓和ios同时为false表示未知设备）
+用户代理：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+错误信息：a is not defined
+---------------------------------- 

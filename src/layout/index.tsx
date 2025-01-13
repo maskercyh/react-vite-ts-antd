@@ -77,19 +77,19 @@ const Layout: React.FC = () => {
 
             <main className={styles["app-main"]}>
               <div className={styles["app-main-flex"]}>
-                {/* <KeepAlive id={pathname} name={pathname} enabled={false}> */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={pathname}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Outlet />
-                  </motion.div>
-                </AnimatePresence>
-                {/* </KeepAlive> */}
+                <KeepAlive id={pathname} name={pathname} enabled={false}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={pathname}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Outlet />
+                    </motion.div>
+                  </AnimatePresence>
+                </KeepAlive>
               </div>
             </main>
           </section>

@@ -121,19 +121,6 @@ export default function TabsTop() {
       remove(targetKey as string);
     }
   };
-  const sensor = useSensor(PointerSensor, {
-    activationConstraint: { distance: 10 },
-  });
-  const onDragEnd = ({ active, over }: DragEndEvent) => {
-    if (active.id !== over?.id) {
-      const oldIndex = tabs.findIndex((tab) => tab.key === active.id);
-      const newIndex = tabs.findIndex((tab) => tab.key === over?.id);
-      if (oldIndex !== -1 && newIndex !== -1) {
-        const updatedTabs = arrayMove(tabs, oldIndex, newIndex);
-        dispatch(setNav(updatedTabs));
-      }
-    }
-  };
 
   const onChange = (key: string) => {
     const tab = tabs.find((tab) => tab.key === key) as TabsData;
@@ -272,9 +259,6 @@ export default function TabsTop() {
         activeKey={activeKey}
         items={tabData}
         type="editable-card"
-        className={styles["tab-top-nav-list"]}
-        tabBarGutter={5}
-        renderTabBar={renderTabBar}
         className={styles["tab-top-nav-list"]}
         tabBarGutter={5}
         renderTabBar={renderTabBar}

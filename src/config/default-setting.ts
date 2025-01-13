@@ -6,7 +6,7 @@ export default {
     theme: 'light',
     title: 'RTVA',
     colorPrimary: '#1677FF',
-    watermark: true,
-    compact: false,
+    watermark: false,
+    compact: true,
     keepAlive: false
 } as LayoutSetting

@@ -53,7 +53,6 @@ function AppContent() {
   );
 }
 
-// Main component for handling routing (HashRouter or BrowserRouter)
 export default () => {
   return LayoutSetting.routeType === "hash" ? (
     <HashRouter>

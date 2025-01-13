@@ -71,6 +71,12 @@ importers:
       express:
         specifier: ^4.21.1
         version: 4.21.1
+      express-group-routes:
+        specifier: ^1.1.0
+        version: 1.1.0
+      express-ws:
+        specifier: ^5.0.2
+        version: 5.0.2(express@4.21.1)
       framer-motion:
         specifier: ^11.14.0
         version: 11.14.0(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -122,12 +128,15 @@ importers:
       rollup-plugin-copy:
         specifier: ^3.5.0
         version: 3.5.0
+      source-map:
+        specifier: ^0.7.4
+        version: 0.7.4
+      tracekit:
+        specifier: ^0.4.7
+        version: 0.4.7
       uuidjs:
         specifier: ^5.1.0
         version: 5.1.0
-      xy-ui:
-        specifier: ^1.10.7
-        version: 1.10.7
     devDependencies:
       '@antfu/eslint-config':
         specifier: 2.9.0
@@ -3410,6 +3419,15 @@ packages:
   eventemitter3@5.0.1:
     resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
 
+  express-group-routes@1.1.0:
+    resolution: {integrity: sha512-KyYb90KdiPuE847Na4KIx3n2rfBQgg1QLuFO68zGJbrgnLpKu+IzglRgLA4uMZFcS2laTTebOYpy3sSnuU0u+g==}
+
+  express-ws@5.0.2:
+    resolution: {integrity: sha512-0uvmuk61O9HXgLhGl3QhNSEtRsQevtmbL94/eILaliEADZBHZOQUAiHFrGPrgsjikohyrmSG5g+sCfASTt0lkQ==}
+    engines: {node: '>=4.5.0'}
+    peerDependencies:
+      express: ^4.0.0 || ^5.0.0-alpha.1
+
   express@4.21.1:
     resolution: {integrity: sha512-YSFlK1Ee0/GC8QaO91tHcDxJiE/X4FbpAyQWkxAvG6AXCuR65YzK8ua6D9hvi/TzUfZMpc+BwuM1IPw8fmQBiQ==}
     engines: {node: '>= 0.10.0'}
@@ -5491,6 +5509,9 @@ packages:
     resolution: {integrity: sha512-tk2G5R2KRwBd+ZN0zaEXpmzdKyOYksXwywulIX95MBODjSzMIuQnQ3m8JxgbhnL1LeVo7lqQKsYa1O3Htl7K5g==}
     engines: {node: '>=18'}
 
+  tracekit@0.4.7:
+    resolution: {integrity: sha512-d3BLRambfZ0VOYLIh7FRSElugsOMrNgxzT4jXyOXC7lnhoeEJIHNg8VAcpKVVmu9kREGUAVg8Eh3SlRfkU/ksQ==}
+
   tree-kill@1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
@@ -6012,9 +6033,6 @@ packages:
   xtend@2.1.2:
     resolution: {integrity: sha512-vMNKzr2rHP9Dp/e1NQFnLQlwlhp9L/LfvnsVdHxN1f+uggyVI3i08uD14GPvCToPkdsRfyPqIyYGmIk58V98ZQ==}
     engines: {node: '>=0.4'}
-
-  xy-ui@1.10.7:
-    resolution: {integrity: sha512-GUb7SIV8p/ItF2bsRSs2c9inewPgORzRgQc4+wwpDMriHs9YnQEpwasG57i/RA0TZ+4IMh9GEu9D3dIfx0Lb1A==}
 
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
@@ -10115,6 +10133,20 @@ snapshots:
 
   eventemitter3@5.0.1: {}
 
+  express-group-routes@1.1.0:
+    dependencies:
+      express: 4.21.1
+    transitivePeerDependencies:
+      - supports-color
+
+  express-ws@5.0.2(express@4.21.1):
+    dependencies:
+      express: 4.21.1
+      ws: 7.5.10
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   express@4.21.1:
     dependencies:
       accepts: 1.3.8
@@ -12358,6 +12390,8 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
+  tracekit@0.4.7: {}
+
   tree-kill@1.2.2: {}
 
   ts-api-utils@1.3.0(typescript@5.6.3):
@@ -12909,8 +12943,6 @@ snapshots:
   xtend@2.1.2:
     dependencies:
       object-keys: 0.4.0
-
-  xy-ui@1.10.7: {}
 
   y18n@5.0.8: {}
 

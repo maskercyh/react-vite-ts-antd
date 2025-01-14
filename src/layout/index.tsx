@@ -1,9 +1,6 @@
-import { useDispatch } from "react-redux";
 import { useNavigate, Outlet } from "react-router-dom";
-import { toggleCollapsed, togglePhone } from "@/stores/menu";
 import { useLocation } from "react-router-dom";
 import { useCommonStore } from "@/stores";
-import type { AppDispatch } from "@/stores";
 import SettingDrawer from "./components/settingDrawer";
 import SideMenu from "./components/menu/SideMenu";
 import Header from "./components/Header";
@@ -11,25 +8,16 @@ import TabsTop from "./components/TabsTop";
 import { KeepAlive, useAliveController } from "react-activation";
 import styles from "./index.module.less";
 import { AnimatePresence, motion } from "framer-motion";
-import { Watermark, message } from "antd";
+import { Watermark } from "antd";
 import classNames from "classnames";
 
 const Layout: React.FC = () => {
-  const {
-    menuList,
-    isMaximize,
-    isCollapsed,
-    isPhone,
-    isRefresh,
-    configSetting,
-    spiltMenu,
-  } = useCommonStore();
+  const { menuList, isCollapsed, isPhone, configSetting, spiltMenu } =
+    useCommonStore();
   const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
   const { pathname } = useLocation();
-  const [messageApi, contextHolder] = message.useMessage();
   const { i18n } = useTranslation();
-  const { clear, refreshScope, getCachingNodes } = useAliveController();
+  const { refreshScope, getCachingNodes } = useAliveController();
   const currentLanguage = i18n.language;
 
   const refreshAllKeepalive = () => {

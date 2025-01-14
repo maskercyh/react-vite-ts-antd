@@ -1,9 +1,9 @@
 export async function getUserInfo(params?: { [key: string]: any }) {
-    return usePost<API.LoginResult>('/user/info', params);
+    return usePost('/user/info', params);
 }
 export async function userLogout(params?: { [key: string]: any }) {
-    return usePost<API.LoginResult>('/user/logout', params);
+    return usePost('/user/logout', params);
 }
 export async function test(params?: { [key: string]: any }) {
-    return usePost<API.LoginResult>('/user/test', params);
+    return usePost('/user/test', params);
 }

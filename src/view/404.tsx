@@ -2,7 +2,6 @@ import type { AppDispatch } from "@/stores";
 import { useNavigate } from "react-router-dom";
 import { logout } from "~@/stores/user";
 import { useDispatch } from "react-redux";
-import { useCommonStore } from "@/hooks/useCommonStore";
 
 function NotFound() {
   const navigate = useNavigate();

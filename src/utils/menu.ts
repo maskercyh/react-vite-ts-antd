@@ -32,7 +32,6 @@ export function toRoute(
       const childRoutes = toRoute(item.children, path);
       resRoute.push(...childRoutes);
     }
-
     return resRoute;
   }, []);
 }

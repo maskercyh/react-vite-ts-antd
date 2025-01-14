@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, memo } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import {
   setThemeValue,
   THEME_KEY,

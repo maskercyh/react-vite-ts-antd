@@ -1,5 +1,3 @@
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "@/stores";
 import LangSelect from "~@/components/LangSelect";
 import UserAvater from "~@/components/UserAvater";
 import styles from "../index.module.less";
@@ -10,13 +8,11 @@ import SplitMenu from "./menu/SplitMenu";
 import SideMenu from "./menu/SideMenu";
 import { Drawer } from "antd";
 import classNames from "classnames"; // 动态类名优化
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useCommonStore } from "@/stores"; // 假设你有这个 hook
 
 export default function Header() {
-  const dispatch: AppDispatch = useDispatch();
-  const { isCollapsed, isMaximize, username, isPhone, configSetting } =
-    useCommonStore();
+  const { isPhone, configSetting } = useCommonStore();
   const [open, setOpen] = useState<boolean>(false);
 
   const showMenu = () => setOpen(true);

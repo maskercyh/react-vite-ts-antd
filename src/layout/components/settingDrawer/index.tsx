@@ -5,14 +5,7 @@ import styles from "@/layout/index.module.less";
 import { useDispatch } from "react-redux";
 import Theme from "@/components/Theme";
 import Layout from "@/components/Layout";
-import {
-  setLayout,
-  setColorPrimary,
-  setWatermark,
-  LAYOUT_KEY,
-  setCompact,
-} from "@/stores/public";
-import type { LayoutType } from "#/public";
+import { setColorPrimary, setWatermark, setCompact } from "@/stores/public";
 import type { AppDispatch } from "@/stores";
 import { ColorPicker } from "antd";
 

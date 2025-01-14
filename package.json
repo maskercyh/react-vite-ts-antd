@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "concurrently \"vite\" \"npm run mock-api\"",
     "dev-api": "vite",
-    "build": "tsc -b && vite build",
+    "buildcheck": "tsc -b && vite build",
+    "build": "vite build",
     "mock-api": "nodemon  -q  server/index.js",
     "lint": "eslint .",
     "preview": "vite preview"

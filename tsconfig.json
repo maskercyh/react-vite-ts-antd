@@ -7,6 +7,9 @@
       "DOM.Iterable",
       "ESNext"
     ],
+    "declaration": false, // 禁用声明文件生成
+    "declarationMap": false, // 如果有开启 source map, 也禁用 .d.ts.map 文件
+    "emitDeclarationOnly": false, // 只有声明文件，不生成 JS 文件
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,

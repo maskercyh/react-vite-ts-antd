@@ -16,7 +16,6 @@ import { createStyles } from "antd-style";
 import React, { useEffect, useState } from "react";
 import { setToken } from "@/stores/user";
 import { useNavigate } from "react-router-dom";
-import { useCommonStore } from "@/stores";
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -73,7 +72,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const [type, setType] = useState<string>("account");
   const token = getLocalInfo(STORAGE_AUTHORIZE_KEY);
-  const { permissions, menuList } = useCommonStore();
+  const loginType = "account";
   const [isLoading, setLoading] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
@@ -88,7 +87,8 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: any) => {
     try {
       setLoading(true);
-      const { code, data } = await login(values);
+      const { code, data } = (await login(values)) as any;
+
       if (Number(code) !== 200) return;
       dispatch(setToken(data.token));
       navigate("/");
@@ -110,7 +110,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: "75vw",
           }}
-          logo={<img alt="logo" src="/logo.svg" />}
+          // logo={<img alt="logo" src="/logo.svg" />}
           title="Ant Design"
           initialValues={{
             autoLogin: true,
@@ -171,9 +171,7 @@ const Login: React.FC = () => {
             </>
           )}
 
-          {status === "error" && loginType === "mobile" && (
-            <LoginMessage content="验证码错误" />
-          )}
+          {status === "error" && <LoginMessage content="验证码错误" />}
           {type === "mobile" && (
             <>
               <ProFormText
@@ -217,12 +215,12 @@ const Login: React.FC = () => {
                   },
                 ]}
                 onGetCaptcha={async (phone) => {
-                  const result = await getFakeCaptcha({
-                    phone,
-                  });
-                  if (!result) {
-                    return;
-                  }
+                  // const result = await getFakeCaptcha({
+                  //   phone,
+                  // });
+                  // if (!result) {
+                  //   return;
+                  // }
                   message.success("获取验证码成功！验证码为：1234");
                 }}
               />
@@ -233,7 +231,7 @@ const Login: React.FC = () => {
               marginBottom: 24,
             }}
           >
-            <ProFormCheckbox noStyle name="autoLogin">
+            <ProFormCheckbox noStyle v-loading={isLoading} name="autoLogin">
               自动登录
             </ProFormCheckbox>
             <a

@@ -6,11 +6,9 @@ import { logout } from "~@/stores/user";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import type { AppDispatch } from "@/stores";
-import { test } from "@/api/user";
 function App() {
   const { t } = useTranslation();
   const { RangePicker } = DatePicker;
-  const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const [count, setCount] = useState(0);
@@ -20,7 +18,7 @@ function App() {
   }
   function toDdashboard() {
     // test();
-    console.log(a);
+    // console.log(a);
     // navigate("/dashboard");
   }
   return (

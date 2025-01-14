@@ -1,16 +1,8 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
-// import { AxiosLoading } from './loading'
 import { STORAGE_AUTHORIZE_KEY, LANG } from '@/stores/public'
-import { setLocalInfo, getLocalInfo, removeLocalInfo } from '@/utils/local';
+import { getLocalInfo, } from '@/utils/local';
 import { ContentTypeEnum, RequestEnum } from '~#/http-enum'
-// import { useSelector } from 'react-redux';
-// import { RootState } from '@/stores';
-import { logout } from '@/stores/user';
-import { notification as notificationInfo } from 'antd'
-import { useDispatch } from 'react-redux';
-// const token = useSelector((state: RootState) => state.auth.token);
-// import router from '~/router'
 
 export interface ResponseBody<T = any> {
   code: number
@@ -20,11 +12,10 @@ export interface ResponseBody<T = any> {
 
 export interface RequestConfigExtra {
   token?: boolean
-  customDev?: boolean
   loading?: boolean
 }
 const instance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API ?? '/',
+  baseURL: import.meta.env.VITE_APP_BASE_URL ?? '/',
   timeout: 60000,
   headers: { 'Content-Type': ContentTypeEnum.JSON },
 })
@@ -35,10 +26,9 @@ async function requestHandler(config: InternalAxiosRequestConfig & RequestConfig
     import.meta.env.DEV
     && import.meta.env.VITE_APP_BASE_API_DEV
     && import.meta.env.VITE_APP_BASE_URL_DEV
-    && config.customDev
   ) {
     //  替换url的请求前缀baseUrl
-    config.baseURL = import.meta.env.VITE_APP_BASE_API_DEV
+    config.baseURL = import.meta.env.VITE_APP_BASE_URL_DEV
   }
   const token = getLocalInfo(STORAGE_AUTHORIZE_KEY)
   if (token && config.token !== false)
@@ -56,6 +46,7 @@ function responseHandler(response: any): ResponseBody<any> | AxiosResponse<any> 
 }
 
 async function errorHandler(error: AxiosError): Promise<any> {
+
   if (error.response) {
     // const navigate = useNavigate();
     // const dispatch = useDispatch()
@@ -92,6 +83,9 @@ async function errorHandler(error: AxiosError): Promise<any> {
       })
     }
     else if (status === 500) {
+      if (error.request.responseURL.indexOf('errorReportHandle') != -1) {
+        return Promise.reject(error)
+      }
       notification?.info({
         message: '500',
         description: data?.msg || statusText,
@@ -99,6 +93,7 @@ async function errorHandler(error: AxiosError): Promise<any> {
       })
     }
     else {
+
       notification?.info({
         message: '服务错误',
         description: data?.msg || statusText,

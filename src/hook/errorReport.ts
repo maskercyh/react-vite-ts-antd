@@ -2,14 +2,15 @@ import TraceKit from "tracekit";
 import dayjs from "dayjs";
 import { errorReportHandle } from "@/api/common";
 
-const reportedErrors = new Set();
 
 export default function errorReport() {
-    // 订阅 TraceKit 错误
+    const reportedErrors = new Map();
+
     TraceKit.report.subscribe((error) => {
         const { message, stack } = error || {};
         const obj = {
             message,
+            type: 'trace',
             stack: {
                 column: stack[0]?.column,
                 line: stack[0]?.line,
@@ -18,7 +19,7 @@ export default function errorReport() {
             },
             handledByTraceKit: true,
         };
-        report(obj);
+        report(obj, reportedErrors);
     });
 
     window.addEventListener(
@@ -30,26 +31,27 @@ export default function errorReport() {
 
                 const obj = {
                     message: "加载异常: " + err,
+                    type: 'error'
                 };
-                report(obj);
+                report(obj, reportedErrors);
             }
         },
         true
     );
 }
 
-function report(error: any) {
-    // 判断是否是 errorReportHandle 相关错误
-    if (error?.error?.message?.includes("errorReportHandle")) {
-        console.warn("忽略 errorReportHandle 错误");
-        return;
+function report(error: any, reportedErrors: Map<string, number>) {
+    const errorKey = JSON.stringify(error);
+    const now = Date.now();
+
+    if (reportedErrors.has(errorKey)) {
+        const lastReportedTime = reportedErrors.get(errorKey) as number;
+        if (now - lastReportedTime < 60000) {
+            return;
+        }
     }
 
-    const errorKey = JSON.stringify(error);
-    if (reportedErrors.has(errorKey)) return;
-
-    reportedErrors.add(errorKey);
-
+    reportedErrors.set(errorKey, now);
     const data = {
         error,
         data: {
@@ -65,24 +67,16 @@ function report(error: any) {
         },
     };
 
-    // 错误上报带重试机制
     const maxRetries = 3;
     let retryCount = 0;
 
     const attempt = () => {
-        errorReportHandle(data)
-            .then(() => {
-                console.log("错误上报成功");
-            })
-            .catch((err) => {
-                retryCount++;
-                if (retryCount < maxRetries) {
-                    console.warn(`错误上报失败，重试第 ${retryCount} 次`, err);
-                    setTimeout(attempt, 1000 * retryCount); // 指数退避
-                } else {
-                    console.error("错误上报失败，达到最大重试次数:", err);
-                }
-            });
+        errorReportHandle(data).catch((err) => {
+            retryCount++;
+            if (retryCount < maxRetries) {
+                setTimeout(attempt, 1000 * retryCount);
+            }
+        });
     };
 
     attempt();

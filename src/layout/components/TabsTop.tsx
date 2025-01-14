@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from "react";
-import type { DragEndEvent } from "@dnd-kit/core";
-import {
-  DndContext,
-  PointerSensor,
-  closestCenter,
-  useSensor,
-} from "@dnd-kit/core";
-import {
-  arrayMove,
-  horizontalListSortingStrategy,
-  SortableContext,
-  useSortable,
-} from "@dnd-kit/sortable";
+
+import { useSortable } from "@dnd-kit/sortable";
 import type { TabsProps } from "antd";
 import { CSS } from "@dnd-kit/utilities";
 import { Tabs } from "antd";
 import styles from "../index.module.less";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useCommonStore } from "@/stores";
 import type { TabsData } from "@/stores/tabs";
 import { ReloadOutlined } from "@ant-design/icons";
@@ -24,41 +13,40 @@ import {
   setActiveKey,
   addTabs,
   closeTabs,
-  setNav,
   toggleLock,
   setRefresh,
 } from "@/stores/tabs";
 import { Dropdown } from "antd";
-import type { AppDispatch, RootState } from "@/stores";
+import type { AppDispatch } from "@/stores";
 import { useAliveController } from "react-activation";
 import { RouteType } from "#/menu";
 
-interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
-  "data-node-key": string;
-}
+// interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
+//   "data-node-key": string;
+// }
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
-const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: props["data-node-key"],
-    });
+// const DraggableTabNode = ({ className, ...props }: DraggableTabPaneProps) => {
+//   const { attributes, listeners, setNodeRef, transform, transition } =
+//     useSortable({
+//       id: props["data-node-key"],
+//     });
 
-  const style: React.CSSProperties = {
-    ...props.style,
-    transform: CSS.Translate.toString(transform),
-    transition,
-    cursor: "move",
-  };
+//   const style: React.CSSProperties = {
+//     ...props.style,
+//     transform: CSS.Translate.toString(transform),
+//     transition,
+//     cursor: "move",
+//   };
 
-  return React.cloneElement(props.children as React.ReactElement, {
-    ref: setNodeRef,
-    style,
-    ...attributes,
-    ...listeners,
-  });
-};
+//   return React.cloneElement(props.children as React.ReactElement, {
+//     ref: setNodeRef,
+//     style,
+//     ...attributes,
+//     ...listeners,
+//   });
+// };
 
 export default function TabsTop() {
   const { drop, clear } = useAliveController();
@@ -67,10 +55,10 @@ export default function TabsTop() {
   const navigate = useNavigate();
   const { refresh } = useAliveController();
   const { pathname, search } = useLocation();
-  const { tabs, menuList, routeList, activeKey, isLock } = useCommonStore();
+  const { tabs, routeList, activeKey, isLock } = useCommonStore();
   const [loading, setLoading] = useState(false);
   const [time, setTime] = useState<null | NodeJS.Timeout>(null);
-  const [refreshTime, setRefreshTime] = useState<null | NodeJS.Timeout>(null);
+  const [refreshTime] = useState<null | NodeJS.Timeout>(null);
   const url = pathname + search;
   const dispatch: AppDispatch = useDispatch();
   const [tabData, setTabData] = useState<any>([]);

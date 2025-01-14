@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import * as process from 'node:process'
@@ -23,11 +22,6 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
   }
   return {
     plugins: createVitePlugins(env),
-    chainWebpack: config => {
-      // 配置包分析器
-      config.plugin('webpack-bundle-analyzer')
-        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-    },
     resolve: {
       alias: [
         {
@@ -65,6 +59,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
       ],
     },
     build: {
+      sourcemap: true,
       chunkSizeWarningLimit: 4096,
       outDir: OUTPUT_DIR,
       rollupOptions: {
@@ -74,6 +69,7 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
         },
       },
     },
+    // logLevel: "info",
     server: {
       port: 6699,
       open: true,
@@ -88,9 +84,9 @@ export default ({ mode, command }: ConfigEnv): UserConfig => {
         // },
       },
     },
-    test: {
-      globals: true,
-      environment: 'jsdom',
-    },
+    // test: {
+    //   globals: true,
+    //   environment: 'jsdom',
+    // },
   }
 }

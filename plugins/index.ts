@@ -11,13 +11,15 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import AntdResolver from 'unplugin-auto-import-antd'
 import { timePlugin } from './time';
 import viteCompression from 'vite-plugin-compression';
+import UploadSourceMap from "./UploadSourceMap"
 export function createVitePlugins(env: Record<string, string>) {
 
   const vitePluginList: (PluginOption | PluginOption[])[] = [
+    UploadSourceMap(),
     visualizer({
       // 可选配置项
       filename: 'stats.html', // 输出文件名
-      open: true, // 自动打开分析结果页面
+      open: false, // 自动打开分析结果页面
       gzipSize: true, // 显示压缩后的大小
       brotliSize: true, // 显示压缩后的大小
     }),
@@ -54,18 +56,18 @@ export function createVitePlugins(env: Record<string, string>) {
       ]
     }),
     viteBuildInfo(env.VITE_APP_NAME),
-    // 兼容低版本
-    legacy({
-      targets: [
-        'Android > 39',
-        'Chrome >= 60',
-        'Safari >= 10.1',
-        'iOS >= 10.3',
-        'Firefox >= 54',
-        'Edge >= 15',
-      ],
-      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
-    }),
+    // // 兼容低版本
+    // legacy({
+    //   targets: [
+    //     'Android > 39',
+    //     'Chrome >= 60',
+    //     'Safari >= 10.1',
+    //     'iOS >= 10.3',
+    //     'Firefox >= 54',
+    //     'Edge >= 15',
+    //   ],
+    //   additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+    // }),
     // 打包时间
     timePlugin(),
     // 压缩包

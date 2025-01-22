@@ -27,7 +27,7 @@ export const useCommonStore = () => {
     const isLock = useSelector((state: RootState) => state.tabs.isLock)
     const configSetting = useSelector((state: RootState) => state.public)
     //token
-    const token = useSelector((state: RootState) => state.user.token);
+    const token = useSelector((state: RootState) => state.user);
     // 权限
     const permissions = useSelector((state: RootState) => state.user.permissions);
     // 用户ID

@@ -1,9 +1,12 @@
+import { getLocalInfo } from "@/utils/local";
+import { STORAGE_AUTHORIZE_KEY } from "@/stores/public";
 const Dashboart: React.FC = () => {
-  const socket = new WebSocket("ws://localhost:5000");
-  console.log(socket);
+  const token = getLocalInfo(STORAGE_AUTHORIZE_KEY);
+  const socket = new WebSocket(`ws://localhost:5000/socket`);
   socket.onopen = function (e) {
-    socket.send("123");
-    console.log(socket);
+    if (socket.readyState === 1) {
+      socket.send(JSON.stringify({ token: token }));
+    }
   };
   return <>dashboart</>;
 };
